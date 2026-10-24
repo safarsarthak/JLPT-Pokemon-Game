@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="theme-color" content="#d9272e"><meta name="description" content="A Pokédex-inspired Japanese JLPT N5 and N1 revision flashcard adventure through Kanto Academy."><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pokédex · JLPT N5 & N1 Revision</title>
+<style>
+:root{--bg:#f5f6fa;--white:#fff;--text:#202337;--muted:#777b91;--border:#e5e7ef;--accent:#6258e8;--light:#eeecff;--sidebar:#17182a}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button{font:inherit;cursor:pointer}.app{min-height:100vh}.sidebar{width:280px;position:fixed;inset:0 auto 0 0;z-index:10;padding:24px 16px;background:var(--sidebar);color:#f4f4ff;overflow-y:auto;transition:transform .25s}.brand{font-size:23px;font-weight:800}.brand span{display:block;color:#aaa5ff}.subtitle{font-size:12px;color:#aaaac2;line-height:1.6;margin-top:8px}.menu-label{font-size:10px;letter-spacing:1.5px;color:#9999b4;font-weight:800;margin:26px 0 10px;text-transform:uppercase}.category-toggle{display:flex;justify-content:space-between;width:100%;padding:12px;margin-bottom:6px;border:1px solid #373751;border-radius:9px;background:#292944;color:#fff;font-weight:750;text-align:left}.category-toggle.active{background:#39365f;border-color:#6258e8}.verb-list{display:flex;flex-direction:column;gap:4px;margin:0 0 12px 8px}.verb-item{display:flex;flex-direction:column;gap:3px;width:100%;padding:9px 10px;border:1px solid transparent;border-radius:8px;background:transparent;color:#eeeefe;text-align:left}.verb-item:hover{background:#292944}.verb-item.active{background:#39365f;border-color:#6258e8}.verb-jp{font-weight:750;font-size:15px}.verb-en{font-size:11px;color:#b4b4ca;line-height:1.4}.main{min-height:100vh;margin-left:280px;padding:30px clamp(16px,4vw,54px);transition:margin-left .25s}.app.sidebar-collapsed .sidebar{transform:translateX(-100%)}.app.sidebar-collapsed .main{margin-left:0}.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:24px}.header-left{display:flex;align-items:flex-start;gap:12px}.button{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);font-size:12px;font-weight:750}.button:hover:not(:disabled){border-color:var(--accent)}.button.primary{background:var(--accent);border-color:var(--accent);color:white}.button:disabled{opacity:.35;cursor:not-allowed}.icon-button{width:40px;height:40px;padding:0;font-size:18px;flex-shrink:0}.eyebrow{font-size:10px;color:var(--accent);font-weight:800;letter-spacing:1.5px;text-transform:uppercase}h1{font-size:clamp(24px,3vw,34px);letter-spacing:-1px;margin:7px 0}.description{font-size:13px;color:var(--muted);line-height:1.6}.set-picker{max-width:850px;margin:0 auto 22px;padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff}.set-picker label{display:block;margin-bottom:10px;font-size:12px;font-weight:800}.set-options{display:flex;gap:10px;flex-wrap:wrap}.set-option{flex:1;min-width:145px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);text-align:left}.set-option strong,.set-option span{display:block}.set-option strong{font-size:13px}.set-option span{font-size:11px;color:var(--muted);margin-top:4px}.set-option.active{background:var(--light);border-color:var(--accent)}.progress-area{max-width:850px;margin:0 auto 18px}.progress-label{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:11px;font-weight:700;color:var(--muted)}.progress-track{height:6px;border-radius:20px;background:#e4e5ef;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);transition:width .2s}.flashcard{max-width:850px;min-height:350px;margin:auto;padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:22px;background:#fff;box-shadow:0 8px 30px #25254408;text-align:center}.card-label{margin-bottom:24px;font-size:10px;letter-spacing:1.6px;font-weight:800;color:var(--muted);text-transform:uppercase}.japanese{font-size:clamp(44px,8vw,76px);font-weight:800;line-height:1.35;overflow-wrap:anywhere}.answer{width:100%;margin-top:22px}.reading{font-size:clamp(20px,4vw,28px);font-weight:800;color:var(--accent);margin-bottom:8px}.meaning{font-size:20px;font-weight:800}.group-label{display:inline-block;margin-top:9px;padding:6px 11px;border-radius:25px;background:var(--light);color:var(--accent);font-size:11px;font-weight:800}.forms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:22px;text-align:left}.form-box{min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fcfcff}.form-name{margin-bottom:7px;color:var(--muted);font-size:10px;font-weight:700}.form-value{font-size:clamp(16px,2vw,20px);font-weight:800;overflow-wrap:anywhere}.flip-row{text-align:center;margin-top:20px}.flip-row .button{min-width:170px}.controls{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;max-width:850px;margin:18px auto}.controls .button{min-width:90px}.tip{max-width:700px;margin:20px auto;color:var(--muted);font-size:12px;line-height:1.7;text-align:center}.kanji-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-top:20px;text-align:left}.char-box{border:1px solid var(--border);border-radius:12px;padding:13px;background:#fcfcff}.char-symbol{font-size:32px;font-weight:800;text-align:center}.char-reading{font-size:14px;color:var(--accent);font-weight:800;text-align:center;margin:3px 0 7px}.char-meaning{font-size:12px;line-height:1.5;text-align:center}.section-label{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:20px}
+@media(max-width:700px){.sidebar{width:min(300px,86vw);box-shadow:12px 0 35px #0002}.app.sidebar-collapsed .sidebar{transform:translateX(-100%)}.app:not(.sidebar-collapsed) .sidebar{transform:translateX(0)}.main{margin-left:0;padding:18px 13px 26px}.topbar{gap:8px;margin-bottom:22px}.header-left{gap:8px}h1{font-size:24px}.description{font-size:12px}.topbar>.button{padding:10px;white-space:nowrap}.flashcard{min-height:310px;padding:24px 14px}.forms{gap:7px}.form-box{padding:10px}.controls .button{flex:1 1 40%}}
+
+/* Kanto Academy: optional pixel-world progression map */
+.kanto-launch{max-width:920px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;background:#142a30;color:#f4fff3;border:3px solid #071419;border-radius:10px;box-shadow:0 4px 0 #70171c;font-weight:900}
+.kanto-launch span{display:block;font-size:11px;font-weight:600;color:#bad5c9;margin-top:3px}
+.kanto-map{max-width:920px;margin:0 auto 18px;padding:16px;border:4px solid #071419;border-radius:12px;box-shadow:inset 0 0 0 3px #e94c50,0 5px 0 #70171c;background-color:#b9d9a0;background-image:linear-gradient(#4d8b5940 2px,transparent 2px),linear-gradient(90deg,#4d8b5940 2px,transparent 2px);background-size:22px 22px;color:#172b28}
+.kanto-map-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:3px 2px 14px}.kanto-map-head h2{font-size:18px;margin:0;text-transform:uppercase;letter-spacing:.5px}.kanto-map-head p{font-size:11px;line-height:1.5;margin:5px 0 0;max-width:500px}
+.kanto-map-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kanto-location{position:relative;min-height:115px;padding:12px;text-align:left;border:3px solid #24443d;border-radius:4px;background:#e3f0ce;color:#17312d;box-shadow:4px 4px 0 #52734d;font-weight:900;image-rendering:pixelated}
+.kanto-location:before{content:"";position:absolute;top:7px;right:8px;width:12px;height:12px;background:#f2c94c;border:2px solid #24443d;box-shadow:3px 3px 0 #a0b78c}
+.kanto-location:hover:not(:disabled){transform:translate(-1px,-1px);box-shadow:5px 5px 0 #52734d}
+.kanto-location:disabled{filter:grayscale(.85);opacity:.75;cursor:not-allowed;background:#b9c5b5}
+.kanto-location .map-icon{display:block;font-size:25px;margin-bottom:5px;filter:saturate(.85)}
+.kanto-location .map-name{display:block;font-size:13px}.kanto-location .map-desc{display:block;margin-top:4px;font-size:10px;font-weight:700;line-height:1.4;color:#42605a}
+.kanto-location .map-status{display:inline-block;margin-top:8px;padding:3px 6px;background:#d2e8c0;border:1px solid #6d9571;font-size:9px;text-transform:uppercase}
+.kanto-location.unlocked{background:#e4f3cf}.kanto-location.current{outline:3px solid #e94c50;outline-offset:1px}.kanto-location.done{background:#c5edc5}.kanto-location.locked .map-status{background:#d6d9d1;border-color:#858f86}
+.kanto-route-note{font-size:10px;font-weight:800;margin:13px 3px 2px;color:#294a3e}
+.kanto-subroutes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.kanto-subroute{padding:5px 7px;border:1px solid #52734d;border-radius:3px;background:#f7ffe9;color:#24443d;font-size:10px;font-weight:800}.kanto-subroute:hover{background:#c8e7a7}
+@media(max-width:700px){.kanto-map{padding:12px}.kanto-map-grid{grid-template-columns:1fr}.kanto-location{min-height:92px}.kanto-launch{align-items:flex-start}.kanto-map-head{flex-direction:column}}
+
+</style>
+
+
+<style id="pokedex-device-theme">
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800;900&display=swap');
+:root{--bg:#b8d8cf;--white:#e9f5e9;--text:#17252b;--muted:#50686b;--border:#1d3339;--accent:#d9272e;--light:#c7e6d7;--sidebar:#172328}
+html{background:#b8d8cf}
+body{font-family:'Nunito',system-ui,sans-serif;background:#b8d8cf url('assets/pixel-landscape.png') center center/cover fixed;color:var(--text);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;background:linear-gradient(#152a3010,#152a301c);pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;min-height:100vh;padding:20px 22px 26px 300px}
+.sidebar{width:270px;left:20px;top:20px;bottom:20px;height:auto;padding:22px 15px;background:linear-gradient(155deg,#27373c,#11191d);border:5px solid #b91f27;border-radius:24px;box-shadow:inset 0 0 0 2px #ff7777,0 8px 0 #78171c,0 14px 30px #10242b60;color:#f5fbf7}
+.brand{font-family:'Press Start 2P',monospace;font-size:13px;line-height:1.8;color:#fff;text-shadow:2px 2px #101719}
+.brand:before{content:"";display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:8px;background:url('assets/capture-orb.svg') center/contain no-repeat}
+.brand span{font-family:'Nunito',sans-serif;color:#b9d9d7;font-size:12px;letter-spacing:1px}
+.subtitle,.verb-en{color:#b9d0ce}.menu-label{color:#9abbb8}
+.category-toggle{background:#15262c;border:2px solid #526a6c;border-radius:8px;color:#f8ffff;box-shadow:inset 0 1px #ffffff20}
+.category-toggle.active{background:#24505a;border-color:#e94c50}
+.verb-item:hover,.verb-item.active{background:#345158;border-color:#d94a4e}
+.main{margin-left:0!important;padding:24px 26px 26px;max-width:1320px;min-height:calc(100vh - 40px);background:linear-gradient(145deg,#c51f26,#e63a35 30%,#a91920);border:6px solid #70171c;border-radius:36px;box-shadow:inset 0 0 0 3px #ff8580,inset 0 0 0 8px #b91f27,0 10px 0 #6e171b,0 18px 40px #142b3050;position:relative}
+.main:before{content:"";position:absolute;left:18px;right:18px;top:12px;height:10px;border-radius:8px;background:repeating-linear-gradient(90deg,#831a20 0 14px,#e96a5e 14px 24px,#9b1a20 24px 38px);opacity:.8}
+.topbar{margin:14px 0 22px;align-items:center}
+.header-left{align-items:center}
+.icon-button{background:#152a32;color:#fff;border:3px solid #050f13;border-radius:9px;box-shadow:inset 0 0 0 2px #52727b}
+.eyebrow{font-family:'Press Start 2P',monospace;font-size:8px;line-height:1.8;color:#d9f4e9;letter-spacing:0}
+h1{font-family:'Press Start 2P',monospace;font-size:clamp(14px,1.7vw,22px);line-height:1.7;letter-spacing:0;color:#fff;text-shadow:2px 3px #7f151a}
+.description{color:#f8d9d5}
+.button,.set-option{border:2px solid #1d353c;background:#e9f5e9;color:#17252b;border-radius:7px;box-shadow:0 3px 0 #789b91;transition:transform .12s,box-shadow .12s}
+.button:hover:not(:disabled),.set-option:hover{border-color:#e23b40;transform:translateY(-1px);box-shadow:0 4px 0 #789b91}
+.button.primary{background:#133746;border-color:#091a20;color:#fff;box-shadow:0 4px 0 #5e9294}
+.topbar>.button{background:#172b33;color:#fff;border-color:#07171d;box-shadow:0 3px 0 #7f171c}
+.set-picker,.flashcard{background:#e8f5e9;border:4px solid #172b31;border-radius:13px;box-shadow:0 0 0 4px #6f151b,0 0 0 7px #f05b55,0 7px 0 #70171c}
+.set-picker{padding:17px;margin-top:8px}
+.set-option.active{background:#c1e4d2;border-color:#d9272e}
+.progress-area{padding:10px 14px;margin-bottom:14px;background:#17272e;border:3px solid #071419;border-radius:10px;color:#e9f5e9;box-shadow:inset 0 0 0 2px #45626a}
+.progress-label{color:#d4e9e1}.progress-track{height:12px;border:2px solid #a8c5bc;background:#25383d;border-radius:4px}.progress-fill{background:#e9333a}
+.flashcard{position:relative;min-height:330px;margin-top:10px;background-color:#e0f1e3;background-image:linear-gradient(#315f5a12 1px,transparent 1px),linear-gradient(90deg,#315f5a12 1px,transparent 1px);background-size:18px 18px}
+.flashcard:after{content:"";position:absolute;right:18px;top:18px;width:32px;height:32px;background:url('assets/capture-orb.svg') center/contain no-repeat;opacity:.95;pointer-events:none}
+.card-label{font-family:'Press Start 2P',monospace;font-size:8px;color:#426466;letter-spacing:0;line-height:1.9}
+.japanese{color:#122328;text-shadow:1px 1px #fff}
+.reading{color:#b91f27}
+.group-label{background:#c3e2d2;color:#193d3f;border:1px solid #638a7e}
+.form-box,.char-box{background:#f3faf3;border:1px solid #a8c9bc;border-radius:6px}
+.form-name,.section-label{color:#4a6d6a}
+.learning-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:850px;margin:18px auto}
+.level-btn{min-height:84px;padding:12px 9px;border:3px solid #253b3e;border-radius:8px;font-weight:900;text-align:center;box-shadow:0 4px 0 #789b91;line-height:1.3}
+.level-btn small{display:block;font-size:11px;font-weight:800;margin-top:5px}
+.level-mastered{background:#20a65a;color:#fff;border-color:#126d3b}
+.level-intermediate{background:#ffd84b;color:#24251d;border-color:#b58c13}
+.level-needs{background:#ef5350;color:#fff;border-color:#a62228}
+.level-btn.selected{outline:4px solid #17252a;outline-offset:2px;transform:translateY(-2px)}
+.status-tag{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:2px solid #24383d;border-radius:5px;font-size:10px;font-weight:900;letter-spacing:.4px;margin:0 auto 14px}
+.status-mastered{background:#20a65a;color:#fff}.status-intermediate{background:#ffd84b;color:#20251e}.status-needs{background:#ef5350;color:#fff}
+.completion-panel{max-width:850px;margin:18px auto;padding:28px 20px;background:#e8f5eb url('assets/pixel-landscape.png') center/cover;border:5px solid #172b31;border-radius:12px;text-align:center;box-shadow:0 0 0 4px #e53b40,0 7px 0 #70171c;position:relative}
+.completion-panel h2{font-family:'Press Start 2P',monospace;font-size:clamp(14px,2.5vw,22px);line-height:1.9;color:#b91f27;text-shadow:1px 1px #fff}
+.completion-panel p{font-weight:900;background:#e8f5ebdd;display:table;margin:10px auto;padding:5px 10px;border-radius:4px}
+.controls{max-width:850px}.controls .button{min-height:42px}
+.tip{max-width:700px;margin:20px auto;color:#f8e5e2;font-size:11px;line-height:1.7;text-align:center}
+@media(min-width:1250px){.app{padding-left:310px;padding-right:22px}.main{padding:26px 32px 30px}.set-picker,.progress-area,.flashcard,.learning-levels,.controls{max-width:920px}}
+@media(max-width:900px){.app{padding:14px}.sidebar{left:14px;top:14px;bottom:14px}.main{padding:22px 16px}.app.sidebar-collapsed .sidebar{transform:translateX(-120%)}.app:not(.sidebar-collapsed) .sidebar{transform:translateX(0)}}
+@media(max-width:700px){.app{padding:10px}.sidebar{width:min(300px,86vw);left:10px;top:10px;bottom:10px;border-width:4px}.main{padding:20px 12px 20px;border-radius:24px;border-width:4px}.topbar{gap:8px;margin-bottom:16px}.header-left{gap:8px}h1{font-size:12px}.eyebrow{font-size:7px}.description{font-size:11px}.topbar>.button{padding:9px;font-size:10px}.flashcard{min-height:290px;padding:24px 12px}.forms{gap:7px}.form-box{padding:10px}.learning-levels{grid-template-columns:1fr;gap:8px}.level-btn{min-height:58px;padding:9px}.level-btn small{display:inline;margin-left:5px}.set-picker{padding:13px}.set-option{min-width:100%;}.completion-panel{padding:20px 10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+
+<style id="device-panel-layout">
+.device-status{position:absolute;top:36px;right:24px;width:190px;display:grid;gap:12px;color:#e9f5e9}
+.completion-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}.completion-actions button{margin:0}
+.device-status-card{padding:14px;background:linear-gradient(145deg,#1d2d33,#0e171b);border:3px solid #071216;border-radius:13px;box-shadow:inset 0 0 0 2px #4b6870,0 3px 0 #74171c;font-size:12px;line-height:1.6}
+.device-status-heading{font-family:'Press Start 2P',monospace;font-size:7px;line-height:1.8;color:#b7d7d6;margin-bottom:9px}
+.mini-progress{height:12px;border:2px solid #a7c5bb;border-radius:4px;background:#263a40;overflow:hidden;margin-bottom:8px}
+.mini-progress span{display:block;height:100%;width:0;background:#e9333a;transition:width .2s}
+.status-legend{display:grid;gap:4px;margin-top:10px;font-size:10px;color:#c2dbd5}
+@media(min-width:1450px){.main{padding-right:235px}.device-status{right:22px;width:190px}.set-picker,.progress-area,.flashcard,.learning-levels,.controls{max-width:calc(100% - 210px)}}
+@media(max-width:1449px){.device-status{display:none}}
+[hidden]{display:none!important}
+.adjective-kanji{font-size:clamp(26px,5vw,40px);font-weight:900;margin:8px 0 16px;color:#17252b}
+ruby{ruby-position:over;ruby-align:center}rt{font-size:.42em;color:#b91f27;font-weight:800}
+@media(max-width:700px){.adjective-kanji{font-size:28px}}
+
+/* Easier N5 navigation and counter cards */
+.study-location{max-width:920px;margin:0 auto 18px;padding:14px 17px;background:#17272e;color:#e9f5e9;border:3px solid #071419;border-radius:10px;box-shadow:inset 0 0 0 2px #45626a;font-size:12px;line-height:1.7}
+.study-location strong{color:#fff}.nav-major{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:13px 12px;border:2px solid #e94c50;border-radius:9px;background:#15262c;color:#fff;font-weight:900;text-align:left;box-shadow:0 3px 0 #70171c;margin:5px 0 10px}
+.nav-major.active{background:#24505a}.nav-category{display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px;padding:10px 11px;margin:4px 0;border:1px solid #526a6c;border-radius:7px;background:#20343a;color:#f4fbf7;font-weight:800;text-align:left}
+.nav-category.active,.nav-category:hover{background:#345158;border-color:#e94c50}.nav-sublist{display:grid;gap:4px;margin:4px 0 10px 10px;padding-left:9px;border-left:2px solid #597b7b}
+.nav-subitem{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;width:100%;padding:9px 10px;border:1px solid transparent;border-radius:7px;background:transparent;color:#edf8f3;text-align:left;font-size:12px;font-weight:750}
+.nav-subitem small{display:block;color:#b9d0ce;font-size:10px;font-weight:600;margin-top:3px;line-height:1.4}.nav-subitem:hover,.nav-subitem.active{background:#345158;border-color:#d94a4e}.nav-count{flex-shrink:0;color:#c4dfd6;font-size:10px;font-weight:800}
+.counter-prompt{font-size:clamp(28px,5vw,46px);font-weight:900;line-height:1.35}.counter-hint{font-size:12px;color:#496765;margin-top:8px}
+[hidden]{display:none!important}
+@media(max-width:700px){.study-location{padding:11px 12px}.nav-sublist{margin-left:6px}.nav-subitem{padding:9px 7px}}
+
+</style>
+
+<style id="kanto-playable-world">
+html,body{margin:0;min-height:100%;}body{overflow-x:hidden}
+.app{display:none}.app.study-active{display:block}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.world-screen{position:fixed;inset:0;z-index:9999;background:#142a22;color:#f4fff0;display:flex;flex-direction:column;overflow:hidden;font-family:'Nunito',system-ui,sans-serif}
+.world-screen[hidden]{display:none!important}
+.world-topbar,.world-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px clamp(12px,3vw,28px);background:#172b30;border-bottom:3px solid #d9272e;box-shadow:0 3px 0 #09181b;z-index:2}
+.world-brand{display:flex;align-items:center;gap:10px}.world-brand strong{display:block;font-family:'Press Start 2P',monospace;font-size:clamp(10px,1.5vw,15px);line-height:1.8}.world-brand small{display:block;color:#a8cfc0;font-size:9px;font-weight:900;letter-spacing:2px}.world-orb{width:34px;height:34px;display:grid;place-items:center;border:3px solid #0c1d20;border-radius:50%;background:linear-gradient(#e93d42 0 46%,#172b30 46% 56%,#e9f5e9 56%);color:#172b30;font-size:19px;box-shadow:inset 0 0 0 2px #f1f4e5}
+.world-help{font-size:11px;color:#c4ded3;text-align:right;line-height:1.7}.world-help b{color:#fff;background:#345158;border:1px solid #5d8582;border-radius:4px;padding:2px 4px}
+.world-stage{position:relative;display:flex;align-items:center;justify-content:center;flex:1;min-height:0;padding:5px;background:radial-gradient(ellipse at center,#31583c,#142a22)}
+#worldCanvas{display:block;width:min(100vw,150vh);height:min(100%,66.6667vw);max-width:100%;max-height:100%;aspect-ratio:3/2;image-rendering:pixelated;border:4px solid #0b1b1e;outline:3px solid #d9272e;box-shadow:0 0 0 7px #172b30,0 10px 0 #071417;border-radius:3px;touch-action:none}
+.world-prompt{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);min-width:min(300px,80vw);padding:10px 15px;background:#172b30;border:3px solid #e9f5e9;outline:3px solid #d9272e;box-shadow:0 5px 0 #071417;text-align:center;color:#f7fff0;pointer-events:none}.world-prompt strong,.world-prompt span{display:block}.world-prompt strong{font-family:'Press Start 2P',monospace;font-size:10px;line-height:1.8}.world-prompt span{font-size:11px;color:#c1ddd0;margin-top:4px}
+.world-toast{position:absolute;top:14px;left:50%;transform:translateX(-50%);padding:8px 12px;background:#fff1b7;color:#26352d;border:2px solid #172b30;box-shadow:3px 3px 0 #172b30;font-size:12px;font-weight:900;text-align:center;max-width:90%}
+.world-bottom{border-top:3px solid #d9272e;border-bottom:0;box-shadow:0 -3px 0 #09181b}.world-objective{display:flex;align-items:center;gap:10px;min-width:0}.objective-dot{width:12px;height:12px;flex:none;border-radius:50%;background:#ffd84f;border:2px solid #0b1b1e;box-shadow:0 0 0 2px #6a7d4d}.world-objective strong,.world-objective small{display:block}.world-objective strong{font-size:12px}.world-objective small{font-size:10px;color:#b9d4c8;margin-top:3px;line-height:1.5}.world-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.world-action{border:2px solid #09181b;background:#e9f5e9;color:#172b30;border-radius:5px;padding:10px 12px;font-size:10px;font-weight:1000;box-shadow:0 3px 0 #52756b}.world-action.primary{background:#ffd94f;color:#172b30}.world-action:active{transform:translateY(2px);box-shadow:0 1px 0 #52756b}
+.mobile-pad{display:none;position:absolute;right:12px;bottom:90px;z-index:3;flex-direction:column;align-items:center;gap:5px}.mobile-pad>div{display:flex;gap:5px}.mobile-pad button{width:43px;height:43px;border:2px solid #102126;border-radius:8px;background:#e9f5e9;color:#172b30;font-size:17px;font-weight:1000;box-shadow:0 3px 0 #52756b;touch-action:none;user-select:none}.mobile-pad button:active{background:#ffd94f;transform:translateY(2px);box-shadow:0 1px 0 #52756b}
+@media(max-width:700px){.world-topbar{padding:8px 10px}.world-help{max-width:150px;font-size:9px}.world-brand small{font-size:7px}.world-orb{width:28px;height:28px}.world-stage{padding:4px 0 76px}.world-bottom{align-items:flex-start;padding:9px 10px;gap:8px}.world-objective{max-width:48%}.world-objective strong{font-size:10px}.world-objective small{font-size:9px}.world-actions{gap:5px}.world-action{padding:9px 7px;font-size:9px}.mobile-pad{display:flex;bottom:91px;right:9px}.mobile-pad button{width:38px;height:38px}.world-prompt{bottom:7px;left:8px;right:8px;transform:none;min-width:0;padding:7px 10px}.world-prompt strong{font-size:9px}.world-prompt span{font-size:10px}#worldCanvas{width:100%;height:auto;max-height:100%;border-width:2px;outline-width:2px;box-shadow:0 0 0 3px #172b30,0 5px 0 #071417}}
+@media(max-height:560px) and (min-width:701px){.world-topbar,.world-bottom{padding:6px 15px}.world-stage{padding:2px}.world-bottom{min-height:52px}.world-action{padding:6px 10px}.world-brand small{display:none}}
+</style>
+</head>
+<body>
+<div id="worldScreen" class="world-screen" aria-label="Kanto Academy game world">
+  <div class="world-topbar"><div class="world-brand"><span class="world-orb">◉</span><div><strong>KANTO ACADEMY</strong><small>WALK · EXPLORE · LEARN</small></div></div><div class="world-help">Move: <b>↑ ↓ ← →</b> or <b>W A S D</b> · Interact: <b>ENTER</b></div></div>
+  <div class="world-stage"><canvas id="worldCanvas" width="960" height="640" aria-label="Walkable pixel art world"></canvas>
+    <div id="worldPrompt" class="world-prompt" hidden><strong id="worldPromptTitle">N5 Verbs</strong><span id="worldPromptText">Press Enter to enter</span></div>
+    <div id="worldToast" class="world-toast" hidden></div>
+  </div>
+  <div class="world-bottom"><div class="world-objective"><span class="objective-dot"></span><div><strong id="worldObjectiveTitle">Your journey begins!</strong><small id="worldObjectiveText">Find the first Pokécenter to begin studying.</small></div></div><div class="world-actions"><button id="worldInteract" class="world-action primary">ENTER / STUDY</button><button id="worldOpenPokedex" class="world-action">POKÉDEX INDEX</button></div></div>
+  <div class="mobile-pad" aria-label="Movement controls"><button data-move="up" aria-label="Move up">▲</button><div><button data-move="left" aria-label="Move left">◀</button><button data-move="down" aria-label="Move down">▼</button><button data-move="right" aria-label="Move right">▶</button></div></div>
+</div><div class="app sidebar-collapsed" id="app"><aside class="sidebar"><div class="brand">POKÉDEX <span>JLPT N5 & N1 REVISION</span></div><div class="subtitle">Catalogue your Japanese. Master every entry.</div><div class="menu-label">POKÉDEX INDEX</div><div id="sidebarSets"></div></aside>
+<main class="main"><header class="topbar"><div class="header-left"><button class="button icon-button" id="toggleSidebar" aria-label="Toggle sidebar">☰</button><div><div class="eyebrow">POKÉDEX · N5 VOCABULARY</div><h1 id="pageTitle">Verb Flashcards</h1><div class="description">Register entries. Reveal answers. Master your set.</div></div></div><div class="header-actions"><button class="button" id="backToWorld">🗺️ BACK TO MAP</button><button class="button" id="shuffleBtn">🔀 Shuffle</button></div></header>
+<section class="study-location" id="studyLocation"><strong>JLPT N5</strong> / Choose a category from the Pokédex Index menu.</section>
+<section class="progress-area"><div class="progress-label"><span id="progressText"></span><span id="percentText"></span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></section>
+<div id="completionPanel" class="completion-panel" hidden><h2>ENTRY COMPLETE!</h2><p id="completionMessage">You have completed this Pokédex set.</p><p>お疲れ様でした！</p><div class="completion-actions"><button class="button primary" id="completionReviewBtn">↻ Review marked entries</button><button class="button" id="completionRestartBtn">⚡ Start a new adventure</button></div></div><section class="flashcard" aria-live="polite"><div id="statusTag" class="status-tag" hidden></div><div class="card-label" id="cardLabel">Masu form</div><div class="japanese" id="japanese"></div><div class="answer" id="answer" hidden><div class="reading" id="reading"></div><div class="adjective-kanji" id="adjectiveKanji" hidden></div><div class="meaning" id="meaning"></div><div class="group-label" id="groupLabel"></div><div class="section-label" id="formsLabel">Conjugations</div><div class="forms" id="forms"></div><div class="section-label" id="breakdownLabel" hidden>Kanji breakdown</div><div class="kanji-breakdown" id="kanjiBreakdown"></div></div></section>
+<div class="flip-row"><button class="button primary" id="flipBtn">◉ SEE ANSWER</button></div>
+<div class="learning-levels" id="learningLevels" aria-label="Choose your learning level">
+<button class="level-btn level-mastered" data-level="mastered">✓ MASTERED<small>I remembered it correctly</small></button>
+<button class="level-btn level-intermediate" data-level="intermediate">◉ INTERMEDIATE<small>I want another look</small></button>
+<button class="level-btn level-needs" data-level="needs">✕ NEEDS REVISION<small>I couldn't recall it</small></button>
+</div>
+<div class="controls"><button class="button" id="prevBtn">← PREVIOUS</button><button class="button" id="restartBtn">↻ RESTART SET</button><button class="button sound-toggle" id="soundBtn">♫ Sound: Off</button></div>
+<aside class="device-status" aria-label="Pokédex status">
+<div class="device-status-card"><div class="device-status-heading">POKÉDEX PROGRESS</div><div class="mini-progress"><span id="sideProgressBar"></span></div><div id="sideProgressText">Ready to begin</div></div>
+<div class="device-status-card"><div class="device-status-heading">CURRENT ENTRY</div><div id="sideCurrentSet">Verbs 1–6</div><div id="sideCurrentWord">Japanese vocabulary</div></div>
+<div class="device-status-card"><div class="device-status-heading">STUDY MODE</div><div id="sideStudyMode">Learning · First round</div><div class="status-legend"><span>● Mastered</span><span>● Intermediate</span><span>● Needs revision</span></div></div>
+</aside>
+<p class="tip">POKÉDEX TIP: Reveal the answer, then choose how well you remembered the entry.</p></main></div>
+<script>
+const makeVerb=(masu,meaning,group,dictionary,nai,ta,nakatta,te)=>({masu,meaning,group,dictionary,nai,ta,nakatta,te});
+const sets={
+"1-6":[
+makeVerb("のみます","To drink","I","のむ","のまない","のんだ","のまなかった","のんで"),makeVerb("ききます","To listen","I","きく","きかない","きいた","きかなかった","きいて"),makeVerb("かきます","To write","I","かく","かかない","かいた","かかなかった","かいて"),makeVerb("よみます","To read","I","よむ","よまない","よんだ","よまなかった","よんで"),makeVerb("はなします","To speak / talk","I","はなす","はなさない","はなした","はなさなかった","はなして"),makeVerb("いきます","To go","I","いく","いかない","いった","いかなかった","いって"),makeVerb("かえります","To return","I","かえる","かえらない","かえった","かえらなかった","かえって"),makeVerb("あいます","To meet","I","あう","あわない","あった","あわなかった","あって"),makeVerb("かいます","To buy","I","かう","かわない","かった","かわなかった","かって"),makeVerb("とります","To take a picture","I","とる","とらない","とった","とらなかった","とって"),makeVerb("まちます","To wait","I","まつ","またない","まった","またなかった","まって"),makeVerb("わかります","To understand","I","わかる","わからない","わかった","わからなかった","わかって"),makeVerb("あります","To exist (non-living things)","I","ある","ない","あった","なかった","あって"),makeVerb("およぎます","To swim","I","およぐ","およがない","およいだ","およがなかった","およいで"),makeVerb("ききます","To ask someone","I","きく","きかない","きいた","きかなかった","きいて"),makeVerb("のります","To ride / board","I","のる","のらない","のった","のらなかった","のって"),makeVerb("はいります","To enter","I","はいる","はいらない","はいった","はいらなかった","はいって"),makeVerb("やります","To do / perform","I","やる","やらない","やった","やらなかった","やって"),makeVerb("あそびます","To play","I","あそぶ","あそばない","あそんだ","あそばなかった","あそんで"),makeVerb("いそぎます","To hurry","I","いそぐ","いそがない","いそいだ","いそがなかった","いそいで"),makeVerb("かえします","To return something","I","かえす","かえさない","かえした","かえさなかった","かえして"),makeVerb("けします","To turn off / erase","I","けす","けさない","けした","けさなかった","けして"),makeVerb("しにます","To die","I","しぬ","しなない","しんだ","しななかった","しんで"),makeVerb("すいます","To smoke / inhale","I","すう","すわない","すった","すわなかった","すって"),makeVerb("たちます","To stand up","I","たつ","たたない","たった","たたなかった","たって"),makeVerb("すわります","To sit down","I","すわる","すわらない","すわった","すわらなかった","すわって"),makeVerb("つかいます","To use","I","つかう","つかわない","つかった","つかわなかった","つかって"),makeVerb("てつだいます","To help","I","てつだう","てつだわない","てつだった","てつだわなかった","てつだって"),makeVerb("やすみます","To rest / be absent","I","やすむ","やすまない","やすんだ","やすまなかった","やすんで"),makeVerb("もちます","To hold / carry","I","もつ","もたない","もった","もたなかった","もって"),makeVerb("います","To exist (living things)","II","いる","いない","いた","いなかった","いて"),makeVerb("ねます","To sleep","II","ねる","ねない","ねた","ねなかった","ねて"),makeVerb("みます","To see / watch","II","みる","みない","みた","みなかった","みて"),makeVerb("たべます","To eat","II","たべる","たべない","たべた","たべなかった","たべて"),makeVerb("でかけます","To go out","II","でかける","でかけない","でかけた","でかけなかった","でかけて"),makeVerb("つけます","To turn on","II","つける","つけない","つけた","つけなかった","つけて"),makeVerb("あけます","To open","II","あける","あけない","あけた","あけなかった","あけて"),makeVerb("しめます","To close","II","しめる","しめない","しめた","しめなかった","しめて"),makeVerb("おしえます","To teach","II","おしえる","おしえない","おしえた","おしえなかった","おしえて"),makeVerb("わすれます","To forget","II","わすれる","わすれない","わすれた","わすれなかった","わすれて"),makeVerb("あびます","To take a shower","II","あびる","あびない","あびた","あびなかった","あびて"),makeVerb("おります","To get off","II","おりる","おりない","おりた","おりなかった","おりて"),makeVerb("かります","To borrow","II","かりる","かりない","かりた","かりなかった","かりて"),makeVerb("おきます","To get up","II","おきる","おきない","おきた","おきなかった","おきて"),makeVerb("します","To do","III","する","しない","した","しなかった","して"),makeVerb("べんきょうします","To study","III","べんきょうする","べんきょうしない","べんきょうした","べんきょうしなかった","べんきょうして"),makeVerb("でんわします","To call by phone","III","でんわする","でんわしない","でんわした","でんわしなかった","でんわして"),makeVerb("きます","To come","III","くる","こない","きた","こなかった","きて"),makeVerb("もってきます","To bring a thing","III","もってくる","もってこない","もってきた","もってこなかった","もってきて"),makeVerb("つれてきます","To bring a person","III","つれてくる","つれてこない","つれてきた","つれてこなかった","つれてきて")
+],
+"7-12":[
+["かぶります","To put on a hat","I","かぶる","かぶらない","かぶった","かぶらなかった","かぶって"],["はきます","To put on pants / a skirt","I","はく","はかない","はいた","はかなかった","はいて"],["すみます","To live (in a place)","I","すむ","すまない","すんだ","すまなかった","すんで"],["はたらきます","To work","I","はたらく","はたらかない","はたらいた","はたらかなかった","はたらいて"],["うたいます","To sing","I","うたう","うたわない","うたった","うたわなかった","うたって"],["しります","To know","I","しる","しらない","しった","しらなかった","しって"],["ふとります","To gain weight","I","ふとる","ふとらない","ふとった","ふとらなかった","ふとって"],["あらいます","To wash","I","あらう","あらわない","あらった","あらわなかった","あらって"],["いいます","To say","I","いう","いわない","いった","いわなかった","いって"],["いります","To need","I","いる","いらない","いった","いらなかった","いって"],["おそくなります","To be late","I","おそくなる","おそくならない","おそくなった","おそくならなかった","おそくなって"],["はいります","To take a bath","I","はいる","はいらない","はいった","はいらなかった","はいって"],["おもいます","To think","I","おもう","おもわない","おもった","おもわなかった","おもって"],["きります","To cut","I","きる","きらない","きった","きらなかった","きって"],["つくります","To make","I","つくる","つくらない","つくった","つくらなかった","つくって"],["ふります","Rain / snow falls","I","ふる","ふらない","ふった","ふらなかった","ふって"],["もっていきます","To take a thing","I","もっていく","もっていかない","もっていった","もっていかなかった","もっていって"],["おどります","To dance","I","おどる","おどらない","おどった","おどらなかった","おどって"],["おわります","Something ends","I","おわる","おわらない","おわった","おわらなかった","おわって"],["のみます","To take medicine","I","のむ","のまない","のんだ","のまなかった","のんで"],["あります","To be popular","I","ある","ない","あった","なかった","あって"],["はじまります","Something begins","I","はじまる","はじまらない","はじまった","はじまらなかった","はじまって"],["ひきます","To play an instrument","I","ひく","ひかない","ひいた","ひかなかった","ひいて"],["もらいます","To receive","I","もらう","もらわない","もらった","もらわなかった","もらって"],["かかります","To take time / money","I","かかる","かからない","かかった","かからなかった","かかって"],["とまります","To stay at a hotel","I","とまる","とまらない","とまった","とまらなかった","とまって"],["なります","To become","I","なる","ならない","なった","ならなかった","なって"],["つきます","To tell a lie","I","つく","つかない","ついた","つかなかった","ついて"],["すきます","To become hungry","I","すく","すかない","すいた","すかなかった","すいて"],["かいます","To own a pet","I","かう","かわない","かった","かわなかった","かって"],["さぼります","To skip classes","I","さぼる","さぼらない","さぼった","さぼらなかった","さぼって"],["とります","To take classes","I","とる","とらない","とった","とらなかった","とって"],["ならいます","To learn","I","ならう","ならわない","ならった","ならわなかった","ならって"],["のぼります","To climb","I","のぼる","のぼらない","のぼった","のぼらなかった","のぼって"],["はしります","To run","I","はしる","はしらない","はしった","はしらなかった","はしって"],["あるきます","To walk","I","あるく","あるかない","あるいた","あるかなかった","あるいて"],["ひきます","To catch a cold","I","ひく","ひかない","ひいた","ひかなかった","ひいて"],["あります","To have a fever","I","ある","ない","あった","なかった","あって"],["かわきます","To become thirsty","I","かわく","かわかない","かわいた","かわかなかった","かわいて"],["はらいます","To pay","I","はらう","はらわない","はらった","はらわなかった","はらって"],["なくします","To lose something","I","なくす","なくさない","なくした","なくさなかった","なくして"],["あります","To be interested in","I","ある","ない","あった","なかった","あって"],["きます","To put on clothes","II","きる","きない","きた","きなかった","きて"],["おぼえます","To memorise","II","おぼえる","おぼえない","おぼえた","おぼえなかった","おぼえて"],["でます","To exit / appear / attend","II","でる","でない","でた","でなかった","でて"],["かけます","To put on glasses","II","かける","かけない","かけた","かけなかった","かけて"],["やせます","To lose weight","II","やせる","やせない","やせた","やせなかった","やせて"],["すてます","To throw away","II","すてる","すてない","すてた","すてなかった","すてて"],["はじめます","To begin","II","はじめる","はじめない","はじめた","はじめなかった","はじめて"],["でます","To cough","II","でる","でない","でた","でなかった","でて"],["わかれます","To break up / separate","II","わかれる","わかれない","わかれた","わかれなかった","わかれて"],["きめます","To decide","II","きめる","きめない","きめた","きめなかった","きめて"],["つかれます","To get tired","II","つかれる","つかれない","つかれた","つかれなかった","つかれて"],["やめます","To quit","II","やめる","やめない","やめた","やめなかった","やめて"],["けっこんします","To marry","III","けっこんする","けっこんしない","けっこんした","けっこんしなかった","けっこんして"],["うんてんします","To drive","III","うんてんする","うんてんしない","うんてんした","うんてんしなかった","うんてんして"],["せんたくします","To do laundry","III","せんたくする","せんたくしない","せんたくした","せんたくしなかった","せんたくして"],["そうじします","To clean","III","そうじする","そうじしない","そうじした","そうじしなかった","そうじして"],["りょうりします","To cook","III","りょうりする","りょうりしない","りょうりした","りょうりしなかった","りょうりして"],["うんどうします","To exercise","III","うんどうする","うんどうしない","うんどうした","うんどうしなかった","うんどうして"],["さんぽします","To take a walk","III","さんぽする","さんぽしない","さんぽした","さんぽしなかった","さんぽして"],["りょこうします","To travel","III","りょこうする","りょこうしない","りょこうした","りょこうしなかった","りょこうして"],["ごろごろします","To chill out at home","III","ごろごろする","ごろごろしない","ごろごろした","ごろごろしなかった","ごろごろして"],["れんしゅうします","To practise","III","れんしゅうする","れんしゅうしない","れんしゅうした","れんしゅうしなかった","れんしゅうして"],["けんかします","To fight / quarrel","III","けんかする","けんかしない","けんかした","けんかしなかった","けんかして"],["しょうかいします","To introduce","III","しょうかいする","しょうかいしない","しょうかいした","しょうかいしなかった","しょうかいして"],["だいえっとします","To diet","III","だいえっとする","だいえっとしない","だいえっとした","だいえっとしなかった","だいえっとして"],["ちこくします","To be late","III","ちこくする","ちこくしない","ちこくした","ちこくしなかった","ちこくして"],["りゅうがくします","To study abroad","III","りゅうがくする","りゅうがくしない","りゅうがくした","りゅうがくしなかった","りゅうがくして"],["きんちょうします","To get nervous","III","きんちょうする","きんちょうしない","きんちょうした","きんちょうしなかった","きんちょうして"],["しんぱいします","To worry","III","しんぱいする","しんぱいしない","しんぱいした","しんぱいしなかった","しんぱいして"]
+].map(r=>makeVerb(...r))
+};
+
+/* Kanji words from the supplied N5 Kanji PDF. The hiragana reading is shown on the back. */
+const K=(word,reading,meaning,chars)=>({word,reading,meaning,chars});
+const kanji=[
+K("月曜日","げつようび","Monday",[["月","げつ","moon / month"],["曜","よう","weekday marker"],["日","び","day / sun"]]),K("火曜日","かようび","Tuesday",[["火","か","fire"],["曜","よう","weekday marker"],["日","び","day / sun"]]),K("水曜日","すいようび","Wednesday",[["水","すい","water"],["曜","よう","weekday marker"],["日","び","day / sun"]]),K("木曜日","もくようび","Thursday",[["木","もく","tree / wood"],["曜","よう","weekday marker"],["日","び","day / sun"]]),K("金曜日","きんようび","Friday",[["金","きん","gold / money"],["曜","よう","weekday marker"],["日","び","day / sun"]]),K("土曜日","どようび","Saturday",[["土","ど","earth / soil"],["曜","よう","weekday marker"],["日","び","day / sun"]]),K("日曜日","にちようび","Sunday",[["日","にち","sun / day"],["曜","よう","weekday marker"],["日","び","day / sun"]]),
+K("一日","ついたち","First day of the month",[["一","いち","one"],["日","たち","day / sun"]]),K("二日","ふつか","Second day of the month",[["二","に","two"],["日","か","day"]]),K("三日","みっか","Third day of the month",[["三","さん","three"],["日","か","day"]]),K("四日","よっか","Fourth day of the month",[["四","よん","four"],["日","か","day"]]),K("五日","いつか","Fifth day of the month",[["五","ご","five"],["日","か","day"]]),K("六日","むいか","Sixth day of the month",[["六","ろく","six"],["日","か","day"]]),K("七日","なのか","Seventh day of the month",[["七","なな","seven"],["日","か","day"]]),K("八日","ようか","Eighth day of the month",[["八","はち","eight"],["日","か","day"]]),K("九日","ここのか","Ninth day of the month",[["九","きゅう","nine"],["日","か","day"]]),K("十日","とおか","Tenth day of the month",[["十","じゅう","ten"],["日","か","day"]]),K("二十日","はつか","Twentieth day of the month",[["二","に","two"],["十","じゅう","ten"],["日","か","day"]]),K("二十一日","にじゅういちにち","Twenty-first day of the month",[["二","に","two"],["十","じゅう","ten"],["一","いち","one"],["日","にち","day"]]),
+K("日本","にほん","Japan",[["日","に","sun / day"],["本","ほん","origin / book"]]),K("月","つき","Moon",[["月","つき","moon / month"]]),K("一月","いちがつ","January",[["一","いち","one"],["月","がつ","month"]]),K("四月","しがつ","April",[["四","し","four"],["月","がつ","month"]]),K("七月","しちがつ","July",[["七","しち","seven"],["月","がつ","month"]]),K("九月","くがつ","September",[["九","く","nine"],["月","がつ","month"]]),
+K("木","き","Tree",[["木","き","tree / wood"]]),K("火","ひ","Fire",[["火","ひ","fire"]]),K("水","みず","Water",[["水","みず","water"]]),K("山","やま","Mountain",[["山","やま","mountain"]]),K("火山","かざん","Volcano",[["火","か","fire"],["山","ざん","mountain"]]),K("川","かわ","River",[["川","かわ","river"]]),K("田んぼ","たんぼ","Rice field",[["田","た","rice field"]]),K("水田","すいでん","Paddy field",[["水","すい","water"],["田","でん","rice field"]]),K("お金","おかね","Money",[["金","かね","money / gold"]]),K("金","きん","Gold",[["金","きん","gold / money"]]),K("土","つち","Soil / earth",[["土","つち","soil / earth"]]),K("土木","どぼく","Civil engineering",[["土","ど","soil / earth"],["木","ぼく","wood"]]),
+K("人","ひと","Person",[["人","ひと","person"]]),K("日本人","にほんじん","Japanese person",[["日","に","sun / day"],["本","ほん","origin / book"],["人","じん","person"]]),K("一人","ひとり","One person",[["一","ひと","one"],["人","り","person"]]),K("二人","ふたり","Two people",[["二","ふた","two"],["人","り","person"]]),K("三人","さんにん","Three people",[["三","さん","three"],["人","にん","person"]]),K("四人","よにん","Four people",[["四","よ","four"],["人","にん","person"]]),K("何人","なんにん","How many people",[["何","なん","what / how many"],["人","にん","person"]]),K("何人","なにじん","What nationality",[["何","なに","what"],["人","じん","person / nationality"]]),K("子ども","こども","Child",[["子","こ","child"]]),K("女の子","おんなのこ","Girl",[["女","おんな","woman / female"],["子","こ","child"]]),K("男の子","おとこのこ","Boy",[["男","おとこ","man / male"],["子","こ","child"]]),K("口","くち","Mouth",[["口","くち","mouth"]]),K("入り口","いりぐち","Entrance",[["入","いり","enter"],["口","ぐち","mouth / opening"]]),K("出口","でぐち","Exit",[["出","で","exit / go out"],["口","ぐち","mouth / opening"]]),K("人口","じんこう","Population",[["人","じん","person"],["口","こう","mouth / opening"]]),K("車","くるま","Car",[["車","くるま","vehicle / car"]]),K("門","もん","Gate",[["門","もん","gate"]]),K("学生","がくせい","Student",[["学","がく","study / learning"],["生","せい","life / birth"]]),K("学校","がっこう","School",[["学","がく","study / learning"],["校","こう","school"]]),K("大学","だいがく","University",[["大","だい","big / large"],["学","がく","study / learning"]]),K("大学生","だいがくせい","University student",[["大","だい","big / large"],["学","がく","study / learning"],["生","せい","student / life"]]),K("高校","こうこう","High school",[["高","こう","high / tall"],["校","こう","school"]]),K("高校生","こうこうせい","High school student",[["高","こう","high / tall"],["校","こう","school"],["生","せい","student"]]),K("先生","せんせい","Teacher",[["先","せん","before / ahead"],["生","せい","life / birth"]]),K("先","さき","Before / ahead",[["先","さき","before / ahead"]]),K("行きます","いきます","To go",[["行","い","go / proceed"]]),K("来ます","きます","To come",[["来","き","come"]]),K("帰ります","かえります","To return",[["帰","かえ","return home"]]),K("今","いま","Now",[["今","いま","now / present"]]),K("今日","きょう","Today",[["今","きょ","now / present"],["日","う","day"]]),K("週","しゅう","Week",[["週","しゅう","week"]]),K("年","ねん","Year",[["年","ねん","year"]]),K("先月","せんげつ","Last month",[["先","せん","previous / before"],["月","げつ","month"]]),K("今月","こんげつ","This month",[["今","こん","now / present"],["月","げつ","month"]]),K("来月","らいげつ","Next month",[["来","らい","come / next"],["月","げつ","month"]]),K("先先週","せんせんしゅう","The week before last",[["先","せん","before / previous / ahead"],["先","せん","before / previous / ahead"],["週","しゅう","week"]]),K("先週","せんしゅう","Last week",[["先","せん","previous / before"],["週","しゅう","week"]]),K("今週","こんしゅう","This week",[["今","こん","now / present"],["週","しゅう","week"]]),K("来週","らいしゅう","Next week",[["来","らい","come / next"],["週","しゅう","week"]]),K("再来週","さらいしゅう","The week after next",[["再","さ","again / next after"],["来","らい","come"],["週","しゅう","week"]]),K("おととし","おととし","Year before last",[]),K("きょねん","きょねん","Last year",[]),K("今年","ことし","This year",[["今","こと","now / present"],["年","し","year"]]),K("来年","らいねん","Next year",[["来","らい","come / next"],["年","ねん","year"]]),K("再来年","さらいねん","Year after next",[["再","さ","again / after"],["来","らい","come"],["年","ねん","year"]]),K("一年生","いちねんせい","First-year student",[["一","いち","one"],["年","ねん","year"],["生","せい","student / life"]]),K("一年","いちねん","One year",[["一","いち","one"],["年","ねん","year"]]),
+K("上","うえ","Up / on top",[["上","うえ","above / top"]]),K("下","した","Below / under",[["下","した","below / under"]]),K("中","なか","Inside / middle",[["中","なか","inside / middle"]]),K("外","そと","Outside",[["外","そと","outside"]]),K("年上","としうえ","Older / senior",[["年","とし","year / age"],["上","うえ","above / older"]]),K("年下","としした","Younger",[["年","とし","year / age"],["下","した","below / younger"]]),K("国","くに","Country",[["国","くに","country"]]),K("外国","がいこく","Foreign country",[["外","がい","outside / foreign"],["国","こく","country"]]),K("外国人","がいこくじん","Foreigner",[["外","がい","foreign"],["国","こく","country"],["人","じん","person"]]),K("中国人","ちゅうごくじん","Chinese person",[["中","ちゅう","middle / central"],["国","ごく","country"],["人","じん","person"]]),K("私","わたし","I / me",[["私","わたし","I / private"]]),K("私たち","わたしたち","We / us",[["私","わたし","I / private"]]),K("一つ","ひとつ","One thing",[["一","ひと","one"],["つ","つ","general counter ending"]]),K("二つ","ふたつ","Two things",[["二","ふた","two"]]),K("三つ","みっつ","Three things",[["三","みっ","three"]]),K("四つ","よっつ","Four things",[["四","よっ","four"]]),K("五つ","いつつ","Five things",[["五","いつ","five"]]),K("六つ","むっつ","Six things",[["六","むっ","six"]]),K("七つ","ななつ","Seven things",[["七","なな","seven"]]),K("八つ","やっつ","Eight things",[["八","やっ","eight"]]),K("九つ","ここのつ","Nine things",[["九","ここの","nine"]]),K("十","とお","Ten things",[["十","とお","ten"]]),K("百","ひゃく","Hundred",[["百","ひゃく","hundred"]]),K("三百","さんびゃく","Three hundred",[["三","さん","three"],["百","びゃく","hundred"]]),K("六百","ろっぴゃく","Six hundred",[["六","ろっ","six"],["百","ぴゃく","hundred"]]),K("八百","はっぴゃく","Eight hundred",[["八","はっ","eight"],["百","ぴゃく","hundred"]]),K("千","せん","Thousand",[["千","せん","thousand"]]),K("三千","さんぜん","Three thousand",[["三","さん","three"],["千","ぜん","thousand"]]),K("八千","はっせん","Eight thousand",[["八","はっ","eight"],["千","せん","thousand"]]),K("万","まん","Ten thousand",[["万","まん","ten thousand"]]),K("円","えん","Yen",[["円","えん","yen / circle"]]),K("円い","まるい","Round",[["円","まる","round / circle"]]),K("大きい","おおきい","Big",[["大","おお","big / large"]]),K("小さい","ちいさい","Small",[["小","ちい","small"]]),K("大人","おとな","Adult",[["大","おとな","big / grown-up"],["人","と","person"]]),K("小学校","しょうがっこう","Elementary school",[["小","しょう","small"],["学","がく","study"],["校","こう","school"]]),K("小学生","しょうがくせい","Elementary school student",[["小","しょう","small"],["学","がく","study"],["生","せい","student"]]),K("書きます","かきます","To write",[["書","か","write"]]),K("店","みせ","Shop",[["店","みせ","shop"]]),K("本店","ほんてん","Main store",[["本","ほん","main / origin / book"],["店","てん","shop"]]),K("書店","しょてん","Bookstore",[["書","しょ","write / book"],["店","てん","shop"]]),K("本屋","ほんや","Bookstore",[["本","ほん","book"],["屋","や","shop / building"]]),K("時","じ","Hour / time",[["時","じ","time / hour"]]),K("間","あいだ","Between / interval",[["間","あいだ","interval / between"]]),K("半","はん","Half",[["半","はん","half"]]),K("時間","じかん","Hours / duration",[["時","じ","time / hour"],["間","かん","interval"]]),K("一時半","いちじはん","Half past one",[["一","いち","one"],["時","じ","hour"],["半","はん","half"]]),K("一時間半","いちじかんはん","One and a half hours",[["一","いち","one"],["時","じ","hour"],["間","かん","duration"],["半","はん","half"]]),K("一週間","いっしゅうかん","One week (duration)",[["一","いっ","one"],["週","しゅう","week"],["間","かん","duration"]]),K("二週間","にしゅうかん","Two weeks (duration)",[["二","に","two"],["週","しゅう","week"],["間","かん","duration"]]),K("分","ふん","Minute / part",[["分","ふん","minute / part"]]),K("分かります","わかります","To understand",[["分","わ","understand / divide"]]),K("一分","いっぷん","One minute",[["一","いっ","one"],["分","ぷん","minute"]]),K("五分","ごふん","Five minutes",[["五","ご","five"],["分","ふん","minute"]]),K("十分","じゅっぷん","Ten minutes",[["十","じゅう","ten"],["分","ぷん","minute"]]),K("何年","なんねん","How many years",[["何","なん","what / how many"],["年","ねん","year"]]),K("何ですか","なんですか","What is it?",[["何","なん","what"]]),K("休み","やすみ","Holiday / rest",[["休","やす","rest"]]),K("休みます","やすみます","To rest / be absent",[["休","やす","rest"]]),K("休日","きゅうじつ","Holiday",[["休","きゅう","rest"],["日","じつ","day"]]),K("男子学生","だんしがくせい","Male student",[["男","だん","male"],["子","し","child"],["学","がく","study"],["生","せい","student"]]),K("女子学生","じょしがくせい","Female student",[["女","じょ","female"],["子","し","child"],["学","がく","study"],["生","せい","student"]]),K("目","め","Eye",[["目","め","eye"]]),K("目上","めうえ","Superior / senior",[["目","め","eye"],["上","うえ","above / senior"]]),K("目上の人","めうえのひと","One's superiors",[["目","め","eye"],["上","うえ","above"],["人","ひと","person"]]),K("耳","みみ","Ear",[["耳","みみ","ear"]]),K("上手","じょうず","Good at something",[["上","じょう","above / skilled"],["手","ず","hand"]]),K("下手","へた","Bad at something",[["下","へ","below"],["手","た","hand / skill"]]),K("足","あし","Leg / foot",[["足","あし","leg / foot"]]),K("足ります","たります","To be sufficient",[["足","た","sufficient / enough"]]),K("雨","あめ","Rain",[["雨","あめ","rain"]]),K("雨天","うてん","Rainy weather",[["雨","う","rain"],["天","てん","sky / weather"]]),K("貝","かい","Shellfish / shell",[["貝","かい","shellfish / shell"]]),K("買います","かいます","To buy",[["買","か","buy"]]),K("花","はな","Flower",[["花","はな","flower"]]),K("花火","はなび","Fireworks",[["花","はな","flower"],["火","び","fire"]]),K("魚","さかな","Fish",[["魚","さかな","fish"]]),K("聞きます","ききます","To listen / ask",[["聞","き","hear / listen"]]),K("新しい","あたらしい","New",[["新","あたら","new"]]),K("新聞","しんぶん","Newspaper",[["新","しん","new"],["聞","ぶん","hear / news"]]),K("新車","しんしゃ","New car",[["新","しん","new"],["車","しゃ","car"]]),K("新年","しんねん","New year",[["新","しん","new"],["年","ねん","year"]]),K("古い","ふるい","Old",[["古","ふる","old"]]),K("古本","ふるほん","Used / old book",[["古","ふる","old"],["本","ほん","book"]]),K("長い","ながい","Long",[["長","なが","long"]]),K("長男","ちょうなん","Eldest son",[["長","ちょう","long / eldest"],["男","なん","male"]]),K("社長","しゃちょう","Company president",[["社","しゃ","company / shrine"],["長","ちょう","chief / leader"]]),K("店長","てんちょう","Shop manager",[["店","てん","shop"],["長","ちょう","chief / leader"]]),K("学長","がくちょう","Principal / university president",[["学","がく","study"],["長","ちょう","chief / leader"]]),K("高い","たかい","Tall / expensive",[["高","たか","high / tall / expensive"]]),K("安い","やすい","Cheap",[["安","やす","cheap / safe"]]),K("多い","おおい","Many / much",[["多","おお","many"]]),K("少ない","すくない","Few / little",[["少","すく","few / little"]]),K("少し","すこし","A little",[["少","すこ","few / little"]]),K("多少","たしょう","More or less / some",[["多","た","many"],["少","しょう","few"]]),K("少年","しょうねん","Boy",[["少","しょう","young / few"],["年","ねん","year / age"]]),K("少女","しょうじょ","Girl",[["少","しょう","young / few"],["女","じょ","female"]]),K("食べます","たべます","To eat",[["食","た","eat / food"]]),K("食べもの","たべもの","Food",[["食","た","eat / food"],["物","もの","thing"]]),K("飲みます","のみます","To drink",[["飲","の","drink"]]),K("飲みもの","のみもの","Drink / beverage",[["飲","の","drink"],["物","もの","thing"]]),K("見ます","みます","To see / watch",[["見","み","see / look"]]),K("読みます","よみます","To read",[["読","よ","read"]]),K("会います","あいます","To meet",[["会","あ","meet"]]),K("話","はなし","Story / talk",[["話","はなし","speech / story"]]),K("話します","はなします","To talk",[["話","はな","speak / talk"]]),K("会話","かいわ","Conversation",[["会","かい","meet"],["話","わ","talk / speech"]]),K("電話","でんわ","Telephone",[["電","でん","electricity"],["話","わ","talk / speech"]]),K("語","ご","Language counter / language",[["語","ご","language / word"]]),K("日本語","にほんご","Japanese language",[["日","に","sun / day"],["本","ほん","origin"],["語","ご","language"]]),K("中国語","ちゅうごくご","Chinese language",[["中","ちゅう","middle / central"],["国","ごく","country"],["語","ご","language"]]),K("前","まえ","In front / before",[["前","まえ","before / in front"]]),K("後","あと","After / later",[["後","あと","after / later"]]),K("後ろ","うしろ","Behind",[["後","うし","behind / after"]]),K("午後","ごご","P.M. / afternoon",[["午","ご","noon"],["後","ご","after"]]),K("午前","ごぜん","A.M. / morning",[["午","ご","noon"],["前","ぜん","before"]]),K("名前","なまえ","Name",[["名","な","name"],["前","まえ","before / in front"]]),K("一年前","いちねんまえ","One year ago",[["一","いち","one"],["年","ねん","year"],["前","まえ","before"]]),K("一年後","いちねんご","One year later",[["一","いち","one"],["年","ねん","year"],["後","ご","after"]]),K("毎","まい","Every",[["毎","まい","every"]]),K("毎日","まいにち","Every day",[["毎","まい","every"],["日","にち","day"]]),K("毎週","まいしゅう","Every week",[["毎","まい","every"],["週","しゅう","week"]]),K("毎月","まいつき","Every month",[["毎","まい","every"],["月","つき","month"]]),K("毎年","まいとし","Every year",[["毎","まい","every"],["年","とし","year"]]),K("言います","いいます","To say",[["言","い","say / word"]]),K("会社","かいしゃ","Company / office",[["会","かい","meet"],["社","しゃ","company"]]),K("社会","しゃかい","Society",[["社","しゃ","society / company"],["会","かい","meet"]]),K("電気","でんき","Electricity / light",[["電","でん","electricity"],["気","き","spirit / energy"]]),K("電車","でんしゃ","Train",[["電","でん","electricity"],["車","しゃ","vehicle"]]),K("天気","てんき","Weather",[["天","てん","sky / heaven"],["気","き","energy / condition"]]),K("元気","げんき","Healthy / energetic",[["元","げん","origin / source"],["気","き","energy / spirit"]]),K("人気","にんき","Popularity",[["人","にん","person"],["気","き","spirit / feeling"]]),K("道","みち","Road / way",[["道","みち","road / way"]]),K("車道","しゃどう","Roadway",[["車","しゃ","vehicle"],["道","どう","road / way"]]),K("友だち","ともだち","Friend",[["友","とも","friend"]]),K("友人","ゆうじん","Friend",[["友","ゆう","friend"],["人","じん","person"]]),K("父","ちち","Father (my own)",[["父","ちち","father"]]),K("お父さん","おとうさん","Someone else's father / polite father",[["父","とう","father"]]),K("母","はは","Mother (my own)",[["母","はは","mother"]]),K("お母さん","おかあさん","Someone else's mother / polite mother",[["母","かあ","mother"]]),K("母国","ぼこく","Motherland",[["母","ぼ","mother"],["国","こく","country"]]),K("気分がいい","きぶんがいい","Feeling good",[["気","き","feeling / spirit"],["分","ぶん","part / state"]]),K("気分がわるい","きぶんがわるい","Feeling bad",[["気","き","feeling / spirit"],["分","ぶん","part / state"]])
+];
+
+// Attach stable identifiers and readings to every study set.
+Object.entries(sets).forEach(([name, rows]) => {
+  sets[name] = rows.map((v, i) => ({ ...v, id: name + "-" + i, reading: v.masu }));
+});
+sets.kanji = kanji.map((v, i) => ({ ...v, id: "kanji-" + i, masu: v.word, group: "Kanji" }));
+
+// JLPT N5 adjectives from JLPT Sensei's N5 adjective list (84 entries).
+const A = (reading, word, meaning, type) => {
+  let negative, past, pastNegative;
+  if (type === "i") {
+    if (word === "良い" || reading === "いい") {
+      negative = "よくない"; past = "よかった"; pastNegative = "よくなかった";
+    } else {
+      const stem = reading.slice(0, -1);
+      negative = stem + "くない";
+      past = stem + "かった";
+      pastNegative = stem + "くなかった";
+    }
+  } else {
+    negative = reading + "じゃない";
+    past = reading + "だった";
+    pastNegative = reading + "じゃなかった";
+  }
+  return { reading, word, meaning, type, negative, past, pastNegative };
+};
+const adjectives = [
+  A("あぶない","危ない","dangerous","i"),
+  A("あかい","赤い","red; crimson; scarlet","i"),
+  A("あかるい","明るい","bright; light","i"),
+  A("あまい","甘い","sweet; sugary; naive","i"),
+  A("あおい","青い","blue; azure","i"),
+  A("あたらしい","新しい","new; novel; fresh; recent","i"),
+  A("あたたかい","暖かい","warm","i"),
+  A("あつい","熱い","hot (to the touch)","i"),
+  A("あつい","厚い","thick","i"),
+  A("あつい","暑い","hot (weather)","i"),
+  A("べんり","便利","convenient; handy; useful","na"),
+  A("ちいさい","小さい","small; little; tiny","i"),
+  A("ちかい","近い","near; close","i"),
+  A("だいじょうぶ","大丈夫","okay; all right; problem-free","na"),
+  A("だいすき","大好き","love; like very much","na"),
+  A("ふるい","古い","old (not used for people)","i"),
+  A("ふとい","太い","thick; fat","i"),
+  A("げんき","元気","lively; energetic; healthy","na"),
+  A("はやい","速い","fast; quick","i"),
+  A("はやい","早い","early; fast","i"),
+  A("へた","下手","unskilled; poor at","na"),
+  A("ひくい","低い","low; short","i"),
+  A("ひま","暇","free; having free time","na"),
+  A("ひろい","広い","wide; spacious","i"),
+  A("ほんとう","本当","true; truth; reality","na"),
+  A("ほしい","欲しい","wanted; desired","i"),
+  A("ほそい","細い","thin; slender","i"),
+  A("いろいろ","色々","various","na"),
+  A("いそがしい","忙しい","busy","i"),
+  A("いたい","痛い","painful; sore","i"),
+  A("いや","嫌","unpleasant; disliked","na"),
+  A("じょうぶ","丈夫","strong; durable","na"),
+  A("じょうず","上手","skillful; good at","na"),
+  A("からい","辛い","spicy","i"),
+  A("かるい","軽い","light (weight)","i"),
+  A("かわいい","可愛い","cute; lovely","i"),
+  A("きいろい","黄色い","yellow","i"),
+  A("けっこう","結構","splendid; enough","na"),
+  A("きらい","嫌い","disliked; hateful","na"),
+  A("きれい","綺麗","pretty; beautiful; clean","na"),
+  A("きたない","汚い","dirty","i"),
+  A("くらい","暗い","dark; gloomy","i"),
+  A("くろい","黒い","black","i"),
+  A("まるい","丸い","round; circular","i"),
+  A("まっすぐ","真っ直ぐ","straight; directly","na"),
+  A("まずい","不味い","unpleasant; bad-tasting","i"),
+  A("みじかい","短い","short","i"),
+  A("むずかしい","難しい","difficult","i"),
+  A("ながい","長い","long; lengthy","i"),
+  A("にぎやか","賑やか","lively; bustling","na"),
+  A("ぬるい","温い","lukewarm","i"),
+  A("おいしい","美味しい","delicious","i"),
+  A("おもい","重い","heavy","i"),
+  A("おもしろい","面白い","interesting; funny","i"),
+  A("おおい","多い","many; numerous","i"),
+  A("おおきい","大きい","big; large","i"),
+  A("おそい","遅い","slow; late","i"),
+  A("りっぱ","立派","splendid; admirable","na"),
+  A("さむい","寒い","cold (weather)","i"),
+  A("せまい","狭い","narrow","i"),
+  A("しろい","白い","white","i"),
+  A("しずか","静か","quiet","na"),
+  A("すき","好き","liked; fond of","na"),
+  A("すくない","少ない","few; little; scarce","i"),
+  A("すずしい","涼しい","cool; refreshing","i"),
+  A("たぶん","多分","perhaps; probably","na"),
+  A("たいへん","大変","serious; difficult; very","na"),
+  A("たいせつ","大切","important; precious","na"),
+  A("たかい","高い","high; tall; expensive","i"),
+  A("たくさん","沢山","many; a lot","na"),
+  A("たのしい","楽しい","fun; enjoyable","i"),
+  A("とおい","遠い","far; distant","i"),
+  A("つまらない","詰まらない","boring; uninteresting","i"),
+  A("つめたい","冷たい","cold to the touch","i"),
+  A("つよい","強い","strong; powerful","i"),
+  A("うるさい","煩い","noisy; annoying","i"),
+  A("うすい","薄い","thin; weak; pale","i"),
+  A("わかい","若い","young","i"),
+  A("わるい","悪い","bad; poor","i"),
+  A("やさしい","易しい","easy; simple","i"),
+  A("やすい","安い","cheap; inexpensive","i"),
+  A("いい","良い","good","i"),
+  A("よわい","弱い","weak","i"),
+  A("ゆうめい","有名","famous","na"),
+].map((v, i) => ({ ...v, id: "adjectives-" + i, masu: v.reading, group: v.type === "i" ? "い-adjective" : "な-adjective" }));
+
+
+// JLPT N5 counter practice, based on the supplied counter chart.
+const counterCategories = {
+  "counter-flat": {name:"Flat Objects", short:"枚 (まい)", description:"Flat objects: paper, shirts", counter:"枚", readings:["いちまい","にまい","さんまい","よんまい","ごまい","ろくまい","ななまい","はちまい","きゅうまい","じゅうまい","なんまい"], kanji:["一枚","二枚","三枚","四枚","五枚","六枚","七枚","八枚","九枚","十枚","何枚"], prompts:["1 flat object","2 flat objects","3 flat objects","4 flat objects","5 flat objects","6 flat objects","7 flat objects","8 flat objects","9 flat objects","10 flat objects","How many flat objects?"]},
+  "counter-machines": {name:"Cars & Appliances", short:"台 (だい)", description:"Cars and electrical appliances", counter:"台", readings:["いちだい","にだい","さんだい","よんだい","ごだい","ろくだい","ななだい","はちだい","きゅうだい","じゅうだい","なんだい"], kanji:["一台","二台","三台","四台","五台","六台","七台","八台","九台","十台","何台"], prompts:["1 car/appliance","2 cars/appliances","3 cars/appliances","4 cars/appliances","5 cars/appliances","6 cars/appliances","7 cars/appliances","8 cars/appliances","9 cars/appliances","10 cars/appliances","How many cars/appliances?"]},
+  "counter-cylinders": {name:"Long Cylindrical Objects", short:"本 (ほん)", description:"Pens, umbrellas, bottles and other long objects", counter:"本", readings:["いっぽん","にほん","さんぼん","よんほん","ごほん","ろっぽん","ななほん","はっぽん","きゅうほん","じゅっぽん / じっぽん","なんぼん"], kanji:["一本","二本","三本","四本","五本","六本","七本","八本","九本","十本","何本"], prompts:["1 long object","2 long objects","3 long objects","4 long objects","5 long objects","6 long objects","7 long objects","8 long objects","9 long objects","10 long objects","How many long objects?"]},
+  "counter-animals": {name:"Small Animals", short:"匹 (ひき)", description:"Small animals such as cats, dogs and fish", counter:"匹", readings:["いっぴき","にひき","さんびき","よんひき","ごひき","ろっぴき","ななひき","はっぴき","きゅうひき","じゅっぴき / じっぴき","なんびき"], kanji:["一匹","二匹","三匹","四匹","五匹","六匹","七匹","八匹","九匹","十匹","何匹"], prompts:["1 small animal","2 small animals","3 small animals","4 small animals","5 small animals","6 small animals","7 small animals","8 small animals","9 small animals","10 small animals","How many small animals?"]},
+  "counter-cups": {name:"Cups & Glasses", short:"杯 (はい)", description:"Cups or glasses of liquid", counter:"杯", readings:["いっぱい","にはい","さんばい","よんはい","ごはい","ろっぱい","ななはい","はっぱい","きゅうはい","じゅっぱい / じっぱい","なんばい"], kanji:["一杯","二杯","三杯","四杯","五杯","六杯","七杯","八杯","九杯","十杯","何杯"], prompts:["1 cup/glass","2 cups/glasses","3 cups/glasses","4 cups/glasses","5 cups/glasses","6 cups/glasses","7 cups/glasses","8 cups/glasses","9 cups/glasses","10 cups/glasses","How many cups/glasses?"]},
+  "counter-books": {name:"Books", short:"冊 (さつ)", description:"Bound books, notebooks and magazines", counter:"冊", readings:["いっさつ","にさつ","さんさつ","よんさつ","ごさつ","ろくさつ","ななさつ","はっさつ","きゅうさつ","じゅっさつ / じっさつ","なんさつ"], kanji:["一冊","二冊","三冊","四冊","五冊","六冊","七冊","八冊","九冊","十冊","何冊"], prompts:["1 book","2 books","3 books","4 books","5 books","6 books","7 books","8 books","9 books","10 books","How many books?"]},
+  "counter-floors": {name:"Building Floors", short:"階 (かい)", description:"Floors or storeys in a building", counter:"階", readings:["いっかい","にかい","さんがい","よんかい","ごかい","ろっかい","ななかい","はっかい","きゅうかい","じゅっかい / じっかい","なんがい"], kanji:["一階","二階","三階","四階","五階","六階","七階","八階","九階","十階","何階"], prompts:["1st floor","2nd floor","3rd floor","4th floor","5th floor","6th floor","7th floor","8th floor","9th floor","10th floor","Which/how many floor?"]},
+  "counter-people": {name:"People", short:"人 (にん / り)", description:"Counting people; note the special readings for one and two", counter:"人", readings:["ひとり","ふたり","さんにん","よにん","ごにん","ろくにん","ななにん","はちにん","きゅうにん","じゅうにん","なんにん"], kanji:["一人","二人","三人","四人","五人","六人","七人","八人","九人","十人","何人"], prompts:["1 person","2 people","3 people","4 people","5 people","6 people","7 people","8 people","9 people","10 people","How many people?"]},
+  "counter-general": {name:"General Objects", short:"つ", description:"General-purpose native Japanese counter", counter:"つ", readings:["ひとつ","ふたつ","みっつ","よっつ","いつつ","むっつ","ななつ","やっつ","ここのつ","とお","いくつ"], kanji:["一つ","二つ","三つ","四つ","五つ","六つ","七つ","八つ","九つ","十","いくつ"], prompts:["1 thing","2 things","3 things","4 things","5 things","6 things","7 things","8 things","9 things","10 things","How many things?"]}
+};
+const counters = {};
+Object.entries(counterCategories).forEach(([key, category]) => {
+  counters[key] = category.readings.map((reading, i) => ({
+    id: `${key}-${i}`,
+    prompt: category.prompts[i],
+    reading,
+    written: category.kanji[i],
+    meaning: `${category.description}. ${category.prompts[i]}.`,
+    counterName: category.short,
+    group: category.name,
+    masu: category.prompts[i],
+    word: category.kanji[i]
+  }));
+});
+
+
+// N1 starter collection based on the JLPT Sensei N1 list. The JLPT has no official kanji syllabus.
+// Each entry includes core readings, a common compound, and an example vocabulary item.
+const n1Raw = [
+["氏","シ","うじ","family name; clan","氏名（しめい）","氏","し","surname / family name"],
+["統","トウ","す.べる","govern; unify","統一（とういつ）","統計（とうけい）","とうけい","statistics"],
+["基","キ","もと・もとい","basis; foundation","基本（きほん）","基準（きじゅん）","きじゅん","standard / criterion"],
+["価","カ","あたい","value; price","価値（かち）","価格（かかく）","かかく","price"],
+["提","テイ","さ.げる","propose; present","提出（ていしゅつ）","提案（ていあん）","ていあん","proposal"],
+["挙","キョ","あ.げる・こぞ.る","raise; action","選挙（せんきょ）","挙手（きょしゅ）","きょしゅ","raising one's hand"],
+["応","オウ","こた.える","respond; apply","対応（たいおう）","応募（おうぼ）","おうぼ","application"],
+["企","キ","くわだ.てる・たくら.む","plan; undertake","企業（きぎょう）","企画（きかく）","きかく","plan / project"],
+["検","ケン","しら.べる","examine; inspect","検査（けんさ）","検索（けんさく）","けんさく","search"],
+["藤","トウ","ふじ","wisteria","藤色（ふじいろ）","藤原（ふじわら）","ふじわら","Fujiwara (surname)"],
+["沢","タク","さわ","marsh; abundance","贅沢（ぜいたく）","沢山（たくさん）","たくさん","many / plenty"],
+["裁","サイ","た.つ・さば.く","judge; cut out","裁判（さいばん）","裁判所（さいばんしょ）","さいばんしょ","court of law"],
+["証","ショウ","あかし","proof; certificate","証明（しょうめい）","証拠（しょうこ）","しょうこ","evidence"],
+["援","エン","—","aid; support","援助（えんじょ）","支援（しえん）","しえん","support / assistance"],
+["可","カ","べ.き","possible; permitted","可能（かのう）","許可（きょか）","きょか","permission"],
+["施","シ・セ","ほどこ.す","carry out; bestow","実施（じっし）","施設（しせつ）","しせつ","facility"],
+["井","セイ・ショウ","い","well","井戸（いど）","天井（てんじょう）","てんじょう","ceiling"],
+["護","ゴ","まも.る","protect; defend","保護（ほご）","看護（かんご）","かんご","nursing / care"],
+["展","テン","—","expand; unfold","発展（はってん）","展示（てんじ）","てんじ","exhibition"],
+["態","タイ","わざ.と","condition; attitude","状態（じょうたい）","態度（たいど）","たいど","attitude"],
+["鮮","セン","あざ.やか","fresh; vivid","新鮮（しんせん）","鮮明（せんめい）","せんめい","clear / vivid"],
+["視","シ","み.る","look at; regard","視点（してん）","視野（しや）","しや","field of vision"],
+["条","ジョウ","えだ・すじ","article; clause","条件（じょうけん）","条約（じょうやく）","じょうやく","treaty"],
+["幹","カン","みき","trunk; main part","幹部（かんぶ）","新幹線（しんかんせん）","しんかんせん","bullet train"],
+["独","ドク","ひと.り","alone; independent","独立（どくりつ）","独自（どくじ）","どくじ","unique / original"],
+["宮","キュウ・グウ・ク","みや","palace; shrine","宮殿（きゅうでん）","神宮（じんぐう）","じんぐう","Shinto shrine"],
+["率","ソツ・リツ","ひき.いる","rate; lead","確率（かくりつ）","効率（こうりつ）","こうりつ","efficiency"],
+["衛","エイ","—","defend; protect","衛生（えいせい）","防衛（ぼうえい）","ぼうえい","defence"],
+["張","チョウ","は.る","stretch; spread","主張（しゅちょう）","緊張（きんちょう）","きんちょう","tension"],
+["監","カン","—","oversee; supervise","監督（かんとく）","監視（かんし）","かんし","surveillance"],
+["環","カン","わ","ring; environment","環境（かんきょう）","循環（じゅんかん）","じゅんかん","circulation"],
+["審","シン","つまび.らか","judge; examine","審査（しんさ）","審判（しんぱん）","しんぱん","referee / judge"],
+["義","ギ","—","justice; righteousness","意義（いぎ）","講義（こうぎ）","こうぎ","lecture"],
+["訴","ソ","うった.える","sue; appeal","訴訟（そしょう）","訴える（うったえる）","うったえる","to appeal / complain"],
+["株","シュ","かぶ","stock; share","株式（かぶしき）","株主（かぶぬし）","かぶぬし","shareholder"],
+["姿","シ","すがた","figure; appearance","姿勢（しせい）","姿（すがた）","すがた","appearance / figure"],
+["閣","カク","—","tower; cabinet","内閣（ないかく）","閣僚（かくりょう）","かくりょう","cabinet minister"],
+["韓","カン","から","Korea","韓国（かんこく）","韓国語（かんこくご）","かんこくご","Korean language"],
+["衆","シュウ・シュ","おお.い","multitude; masses","観衆（かんしゅう）","大衆（たいしゅう）","たいしゅう","the public / masses"],
+["評","ヒョウ","—","evaluate; criticism","評価（ひょうか）","評判（ひょうばん）","ひょうばん","reputation"],
+["岡","コウ","おか","hill; ridge","岡山（おかやま）","静岡（しずおか）","しずおか","Shizuoka (place name)"],
+["影","エイ","かげ","shadow; influence","影響（えいきょう）","撮影（さつえい）","さつえい","photography / filming"],
+["松","ショウ","まつ","pine tree","松林（まつばやし）","松竹（しょうちく）","しょうちく","Shochiku (name)"],
+["撃","ゲキ","う.つ","attack; strike","攻撃（こうげき）","撃退（げきたい）","げきたい","repel / drive back"],
+["佐","サ","—","assist; help","補佐（ほさ）","佐藤（さとう）","さとう","Sato (surname)"],
+["核","カク","—","nucleus; core","核家族（かくかぞく）","核心（かくしん）","かくしん","core / heart"],
+["整","セイ","ととの.える・ととの.う","arrange; put in order","整理（せいり）","調整（ちょうせい）","ちょうせい","adjustment"],
+["融","ユウ","と.ける","melt; finance","金融（きんゆう）","融通（ゆうずう）","ゆうずう","accommodation / flexibility"],
+["製","セイ","—","manufacture; made","製品（せいひん）","製造（せいぞう）","せいぞう","manufacturing"],
+["票","ヒョウ","—","ballot; ticket","投票（とうひょう）","伝票（でんぴょう）","でんぴょう","slip / voucher"],
+["渉","ショウ","わた.る","cross; involve","交渉（こうしょう）","干渉（かんしょう）","かんしょう","interference"],
+["響","キョウ","ひび.く","echo; resonate","影響（えいきょう）","音響（おんきょう）","おんきょう","acoustics / sound"],
+["推","スイ","お.す","infer; recommend","推測（すいそく）","推薦（すいせん）","すいせん","recommendation"],
+["請","セイ・シン・ショウ","こ.う・う.ける","request; ask","申請（しんせい）","請求（せいきゅう）","せいきゅう","claim / request"],
+["器","キ","うつわ","vessel; ability","楽器（がっき）","機器（きき）","きき","equipment"],
+["士","シ","さむらい","scholar; warrior","博士（はかせ）","弁護士（べんごし）","べんごし","lawyer"],
+["討","トウ","う.つ","attack; discuss","検討（けんとう）","討論（とうろん）","とうろん","debate"],
+["攻","コウ","せ.める","attack; study intensively","攻撃（こうげき）","専攻（せんこう）","せんこう","major / specialization"],
+["崎","キ","さき・みさき","cape; promontory","長崎（ながさき）","宮崎（みやざき）","みやざき","Miyazaki (place name)"],
+["督","トク","—","supervise; direct","監督（かんとく）","督促（とくそく）","とくそく","demand / reminder"],
+["授","ジュ","さず.ける","grant; teach","授業（じゅぎょう）","教授（きょうじゅ）","きょうじゅ","professor / instruction"],
+["催","サイ","もよお.す","hold; sponsor","開催（かいさい）","催促（さいそく）","さいそく","urging / reminder"],
+["及","キュウ","およ.ぶ・およ.び","reach; extend","影響及ぶ（えいきょうおよぶ）","普及（ふきゅう）","ふきゅう","spread / diffusion"],
+["憲","ケン","—","constitution; law","憲法（けんぽう）","憲章（けんしょう）","けんしょう","charter"],
+["離","リ","はな.れる・はな.す","separate; leave","距離（きょり）","離婚（りこん）","りこん","divorce"],
+["激","ゲキ","はげ.しい","intense; violent","刺激（しげき）","激増（げきぞう）","げきぞう","sharp increase"],
+["摘","テキ","つ.む","pluck; point out","指摘（してき）","摘発（てきはつ）","てきはつ","exposure / detection"],
+["系","ケイ","—","system; lineage","体系（たいけい）","関係（かんけい）","かんけい","relationship"],
+["批","ヒ","—","criticize","批判（ひはん）","批評（ひひょう）","ひひょう","criticism / review"],
+["郎","ロウ","おとこ","son; young man","長男（ちょうなん）","新郎（しんろう）","しんろう","bridegroom"],
+["健","ケン","すこ.やか","healthy; strong","健康（けんこう）","健全（けんぜん）","けんぜん","sound / wholesome"],
+["従","ジュウ・ショウ・ジュ","したが.う・より","obey; follow","従来（じゅうらい）","従業員（じゅうぎょういん）","じゅうぎょういん","employee"],
+["修","シュウ・シュ","おさ.める","master; discipline","修理（しゅうり）","修正（しゅうせい）","しゅうせい","correction"],
+["隊","タイ","—","group; squad","部隊（ぶたい）","軍隊（ぐんたい）","ぐんたい","military"],
+["織","ショク・シキ","お.る","weave; fabric","組織（そしき）","織物（おりもの）","おりもの","woven fabric"],
+["拡","カク","ひろ.がる","expand; extend","拡大（かくだい）","拡張（かくちょう）","かくちょう","expansion"],
+["故","コ","ゆえ・ふる.い","reason; deceased","故障（こしょう）","事故（じこ）","じこ","accident"],
+["振","シン","ふ.る","shake; wave","振動（しんどう）","振込（ふりこみ）","ふりこみ","bank transfer"],
+["弁","ベン・ヘン","わきま.える・わ.ける","speech; distinguish","弁当（べんとう）","弁護士（べんごし）","べんごし","lawyer"],
+["就","シュウ・ジュ","つ.く","take a position; begin","就職（しゅうしょく）","就任（しゅうにん）","しゅうにん","appointment to a post"],
+["異","イ","こと・こと.なる","different; unusual","異常（いじょう）","異文化（いぶんか）","いぶんか","different culture"],
+["献","ケン・コン","たてまつ.る","offer; dedicate","貢献（こうけん）","献立（こんだて）","こんだて","menu / meal plan"],
+["厳","ゲン・ゴン","きび.しい・おごそ.か","strict; severe","厳格（げんかく）","厳しい（きびしい）","きびしい","strict / severe"],
+["維","イ","—","maintain; fiber","維持（いじ）","繊維（せんい）","せんい","fibre"],
+["浜","ヒン","はま","beach; shore","浜辺（はまべ）","横浜（よこはま）","よこはま","Yokohama"],
+["遺","イ・ユイ","のこ.す","leave behind; bequeath","遺産（いさん）","遺伝（いでん）","いでん","heredity"],
+["塁","ルイ","とりで","base; fort","塁審（るいしん）","満塁（まんるい）","まんるい","bases loaded"],
+["邦","ホウ","くに","homeland; country","邦人（ほうじん）","連邦（れんぽう）","れんぽう","federation"],
+["素","ソ・ス","もと","element; plain","素材（そざい）","素直（すなお）","すなお","honest / obedient"],
+["遣","ケン","つか.う・や.る","dispatch; use","派遣（はけん）","遣い（つかい）","つかい","errand / messenger"],
+["抗","コウ","あらが.う","resist; oppose","抵抗（ていこう）","抗議（こうぎ）","こうぎ","protest"],
+["模","モ・ボ","—","imitation; model","模型（もけい）","模様（もよう）","もよう","pattern"],
+["雄","ユウ","おす・お","male; hero","英雄（えいゆう）","雄大（ゆうだい）","ゆうだい","grand / majestic"],
+["益","エキ・ヤク","ま.す","benefit; profit","利益（りえき）","有益（ゆうえき）","ゆうえき","beneficial"],
+["緊","キン","—","tense; urgent","緊張（きんちょう）","緊急（きんきゅう）","きんきゅう","emergency"],
+["標","ヒョウ","しるべ・しるし","mark; sign","目標（もくひょう）","標準（ひょうじゅん）","ひょうじゅん","standard"],
+["宣","セン","のたま.う","proclaim; announce","宣伝（せんでん）","宣言（せんげん）","せんげん","declaration"],
+["昭","ショウ","—","bright; shining","昭和（しょうわ）","昭明（しょうめい）","しょうめい","bright / clear"],
+["廃","ハイ","すた.れる","abolish; obsolete","廃止（はいし）","廃棄（はいき）","はいき","disposal / abolition"],
+["伊","イ","かれ","Italy; that one","伊太利（いたり）","伊豆（いず）","いず","Izu (place name)"]
+];
+const n1Kanji = n1Raw.map((r,i)=>({id:`n1-${i}`,word:r[0],reading:`On: ${r[1]} · Kun: ${r[2]}`,meaning:`${r[3]}\nCompound: ${r[4]}\nExample: ${r[5]} (${r[6]}) — ${r[7]}`,onReading:r[1],kunReading:r[2],compound:r[4],example:r[5],exampleReading:r[6],exampleMeaning:r[7],chars:[[r[0],`On: ${r[1]}`,`${r[3]} · Kun: ${r[2]}`]],masu:r[0],group:"JLPT N1 Kanji"}));
+
+const setInfo = {
+  "1-6": "Verbs 1–6",
+  "7-12": "Verbs 7–12",
+  kanji: "N5 Kanji with Words",
+  "n1-kanji": "N1 Kanji · Starter Collection",
+  adjectives: "N5 Adjectives",
+  "counter-flat": "Flat Objects",
+  "counter-machines": "Cars & Appliances",
+  "counter-cylinders": "Long Cylindrical Objects",
+  "counter-animals": "Small Animals",
+  "counter-cups": "Cups & Glasses",
+  "counter-books": "Books",
+  "counter-floors": "Building Floors",
+  "counter-people": "People",
+  "counter-general": "General Objects"
+};
+const getSetData = key => key === "adjectives" ? adjectives : key === "n1-kanji" ? n1Kanji : key.startsWith("counter-") ? counters[key] : sets[key];
+const groupLabels = {"1-6":"Verbs", "7-12":"Verbs", kanji:"Kanji", "n1-kanji":"N1 Kanji", adjectives:"Adjectives", ...Object.fromEntries(Object.keys(counterCategories).map(k=>[k,"Counters"]))};
+let currentSet = "1-6";
+let expandedN5 = false;
+let expandedN1 = false;
+let expandedIndex = false;
+let expandedGroup = null;
+let originalDeck = [...getSetData(currentSet)];
+let deck = [...originalDeck];
+let currentIndex = 0;
+let isFlipped = false;
+let reviewIds = new Set();
+const cardLevels = new Map();
+let soundEnabled = false;
+let reviewQueue = [];
+let reviewIndex = 0;
+let reviewMode = false;
+let completedOriginalDeck = false;
+
+// Progression is separate from card-review state so changing sets never erases unlocks.
+const ACADEMY_PROGRESS_KEY = "kantoAcademyCompletedSets_v1";
+let academyCompletedSets = new Set();
+try { academyCompletedSets = new Set(JSON.parse(localStorage.getItem(ACADEMY_PROGRESS_KEY) || "[]")); } catch (e) { academyCompletedSets = new Set(); }
+const academyLocations = [
+  {id:"verbs",name:"Verbs Grove",icon:"🌳",desc:"The first trail · verb conjugation",sets:["1-6","7-12"],next:"Adjective Meadow"},
+  {id:"adjectives",name:"Adjective Meadow",icon:"🌼",desc:"Describe the world around you",sets:["adjectives"],next:"Kanji Ruins"},
+  {id:"kanji",name:"Kanji Ruins",icon:"🏯",desc:"Words, meanings & character clues",sets:["kanji"],next:"Counter Market"},
+  {id:"counters",name:"Counter Market",icon:"🏮",desc:"Numbers, objects and counting words",sets:Object.keys(counterCategories),next:"N1 Summit"},
+  {id:"n1",name:"N1 Summit",icon:"⛰️",desc:"Advanced kanji · the expert challenge",sets:["n1-kanji"],next:null}
+];
+function saveAcademyProgress(){ try { localStorage.setItem(ACADEMY_PROGRESS_KEY, JSON.stringify([...academyCompletedSets])); } catch(e) {} }
+function isLocationComplete(location){ return location.sets.every(key => academyCompletedSets.has(key)); }
+function isLocationUnlocked(index){ return index===0 || isLocationComplete(academyLocations[index-1]); }
+function completeCurrentAcademySet(){ academyCompletedSets.add(currentSet); saveAcademyProgress(); renderKantoMap(); }
+
+const $ = id => document.getElementById(id);
+const currentVerb = () => deck[currentIndex];
+
+function switchSet(key) {
+  currentSet = key;
+  originalDeck = [...getSetData(key)];
+  deck = [...originalDeck];
+  currentIndex = 0;
+  isFlipped = false;
+  reviewIds = new Set();
+  cardLevels.clear();
+  reviewQueue = [];
+  reviewIndex = 0;
+  reviewMode = false;
+  completedOriginalDeck = false;
+  expandedN5 = !key.startsWith("n1-");
+  expandedN1 = key.startsWith("n1-");
+  expandedGroup = groupLabels[key] === "Counters" ? "Counters" : groupLabels[key] === "Verbs" ? "Verbs" : null;
+  render();
+}
+
+function makeNavButton(label, detail, count, className, active, expanded, onClick) {
+  const button = document.createElement("button");
+  button.className = className + (active ? " active" : "");
+  if (expanded !== null) button.setAttribute("aria-expanded", String(expanded));
+  const textWrap = document.createElement("span");
+  textWrap.textContent = label;
+  if (detail) {
+    const small = document.createElement("small");
+    small.textContent = detail;
+    textWrap.appendChild(small);
+  }
+  button.appendChild(textWrap);
+  if (count) {
+    const right = document.createElement("span");
+    right.className = "nav-count";
+    right.textContent = count;
+    button.appendChild(right);
+  }
+  button.addEventListener("click", onClick);
+  return button;
+}
+
+function renderKantoMap(){
+  const grid=$("kantoMapGrid"); if(!grid) return;
+  grid.innerHTML="";
+  academyLocations.forEach((location,index)=>{
+    const unlocked=isLocationUnlocked(index), done=isLocationComplete(location);
+    const current=location.sets.includes(currentSet);
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="kanto-location"+(unlocked?" unlocked":" locked")+(done?" done":"")+(current?" current":"");
+    button.disabled=!unlocked;
+    const progress=location.sets.filter(key=>academyCompletedSets.has(key)).length;
+    const total=location.sets.length;
+    const status=done?"✓ Region cleared":unlocked?`🔓 Open · ${progress}/${total} sets cleared`:"🔒 Locked region";
+    button.innerHTML=`<span class="map-icon">${unlocked?location.icon:"🔒"}</span><span class="map-name">${location.name}</span><span class="map-desc">${location.desc}</span><span class="map-status">${status}</span>`;
+    if(unlocked){
+      button.addEventListener("click",()=>{
+        if(location.id==="verbs") switchSet("1-6");
+        else if(location.id==="counters") switchSet(location.sets.find(key=>!academyCompletedSets.has(key)) || location.sets[0]);
+        else switchSet(location.sets[0]);
+        if(window.matchMedia("(max-width: 700px)").matches) $("app").classList.add("sidebar-collapsed");
+      });
+    }
+    grid.appendChild(button);
+    if(unlocked && location.id==="verbs"){
+      const route=document.createElement("div"); route.className="kanto-subroutes";
+      ["1-6","7-12"].forEach(key=>{const b=document.createElement("button");b.className="kanto-subroute";b.textContent=(key==="1-6"?"Verbs 1–6":"Verbs 7–12")+(academyCompletedSets.has(key)?" ✓":"");b.addEventListener("click",()=>switchSet(key));route.appendChild(b);});
+      grid.appendChild(route);
+    }
+    if(unlocked && location.id==="counters"){
+      const route=document.createElement("div"); route.className="kanto-subroutes";
+      location.sets.forEach(key=>{const b=document.createElement("button");b.className="kanto-subroute";b.textContent=(setInfo[key]||key)+(academyCompletedSets.has(key)?" ✓":"");b.addEventListener("click",()=>switchSet(key));route.appendChild(b);});
+      grid.appendChild(route);
+    }
+  });
+  const nextIndex=academyLocations.findIndex((location,index)=>isLocationUnlocked(index)&&!isLocationComplete(location));
+  const note=$("kantoRouteNote");
+  if(note){
+    if(academyLocations.every(isLocationComplete)) note.textContent="🏆 All regions cleared! The Kanto Academy welcomes its newest master.";
+    else if(nextIndex===0) note.textContent="🚩 Your journey begins at Verbs Grove. Clear both verb sets to unlock Adjective Meadow.";
+    else { const loc=academyLocations[nextIndex]; note.textContent=`🧭 Current destination: ${loc.name}. ${loc.next?`Clear this region to open ${loc.next}.`:"The final challenge awaits."}`; }
+  }
+}
+
+function renderSidebar() {
+  const root = $("sidebarSets");
+  root.innerHTML = "";
+  const major = makeNavButton("JLPT N5", "All study categories", expandedN5 ? "⌄" : "›", "nav-major", expandedN5, expandedN5, () => {
+    expandedN5 = !expandedN5;
+    renderSidebar();
+  });
+  root.appendChild(major);
+  if (!expandedN5) {
+    // N1 is a separate top-level menu, independent of the N5 tree.
+  } else {
+  const menu = document.createElement("div");
+  menu.className = "nav-sublist";
+  const addDirect = (label, detail, key, count) => {
+    menu.appendChild(makeNavButton(label, detail, count, "nav-category", currentSet === key, null, () => switchSet(key)));
+  };
+  const addGroup = (label, detail, keys) => {
+    const expanded = expandedGroup === label;
+    const groupButton = makeNavButton(label, detail, expanded ? "⌄" : "›", "nav-category", keys.includes(currentSet), expanded, () => {
+      expandedGroup = expanded ? null : label;
+      renderSidebar();
+    });
+    menu.appendChild(groupButton);
+    if (!expanded) return;
+    const children = document.createElement("div");
+    children.className = "nav-sublist";
+    keys.forEach(key => {
+      const data = getSetData(key);
+      const detailText = key.startsWith("counter-") ? counterCategories[key].short + " · " + data.length + " cards" : key === "1-6" || key === "7-12" ? "Verb conjugation · " + data.length + " cards" : "";
+      children.appendChild(makeNavButton(setInfo[key], detailText, String(data.length), "nav-subitem", currentSet === key, null, () => {
+        switchSet(key);
+        if (window.matchMedia("(max-width: 700px)").matches) $("app").classList.add("sidebar-collapsed");
+      }));
+    });
+    menu.appendChild(children);
+  };
+  addGroup("Verbs", "Verb conjugation practice", ["1-6", "7-12"]);
+  addDirect("Kanji", "Words and character breakdowns", "kanji", String(sets.kanji.length));
+  addDirect("Adjectives", "い-adjectives and な-adjectives", "adjectives", String(adjectives.length));
+  addGroup("Counters", "Numbers and counting words", Object.keys(counterCategories));
+  root.appendChild(menu);
+  }
+
+  const n1Major = makeNavButton("JLPT N1", "Advanced kanji study", expandedN1 ? "⌄" : "›", "nav-major", currentSet === "n1-kanji", expandedN1, () => {
+    expandedN1 = !expandedN1;
+    renderSidebar();
+  });
+  root.appendChild(n1Major);
+  if (expandedN1) {
+    const n1Menu = document.createElement("div"); n1Menu.className = "nav-sublist";
+    n1Menu.appendChild(makeNavButton("N1 Kanji Collection", "Readings, meanings & vocabulary", String(n1Kanji.length), "nav-subitem", currentSet === "n1-kanji", null, () => switchSet("n1-kanji")));
+    root.appendChild(n1Menu);
+  }
+
+  // The Index is always the final collapsible item and offers direct card navigation.
+  const indexButton = makeNavButton("Index", "Quick access to every card in the selected set", expandedIndex ? "⌄" : "›", "nav-category", false, expandedIndex, () => { expandedIndex = !expandedIndex; renderSidebar(); });
+  root.appendChild(indexButton);
+  if (expandedIndex) {
+    const indexList = document.createElement("div"); indexList.className = "nav-sublist";
+    const entries = getSetData(currentSet) || [];
+    entries.forEach((entry, i) => {
+      const label = currentSet === "kanji" || currentSet === "n1-kanji" ? entry.word : currentSet === "adjectives" ? entry.reading : currentSet.startsWith("counter-") ? entry.reading : entry.masu;
+      const detail = entry.meaning || "";
+      indexList.appendChild(makeNavButton(label, detail, String(i+1), "nav-subitem", i === currentIndex, null, () => {
+        currentIndex = i; isFlipped = false; reviewMode = false; completedOriginalDeck = false; render();
+      }));
+    });
+    root.appendChild(indexList);
+  }
+}
+function furiganaHTML(word, reading) {
+  // Attach the reading to the kanji stem, leaving matching kana endings as okurigana.
+  const trailingKana = (word.match(/[ぁ-ゖー]+$/) || [""])[0];
+  if (trailingKana && /[一-龯々]/.test(word.slice(0, -trailingKana.length))) {
+    const stemReading = reading.endsWith(trailingKana)
+      ? reading.slice(0, -trailingKana.length)
+      : reading;
+    const stem = word.slice(0, -trailingKana.length);
+    return `<ruby>${stem}<rt>${stemReading}</rt></ruby>${trailingKana}`;
+  }
+  return `<ruby>${word}<rt>${reading}</rt></ruby>`;
+}
+function renderCard() {
+  const v = reviewMode ? reviewQueue[reviewIndex] : currentVerb();
+  if (!v) return;
+
+  const isKanji = currentSet === "kanji";
+  const isN1 = currentSet === "n1-kanji";
+  const isAdjective = currentSet === "adjectives";
+  const isCounter = currentSet.startsWith("counter-");
+  const setTitle = setInfo[currentSet] || "JLPT N5";
+  $("pageTitle").textContent = isN1 ? "JLPT N1 Kanji Collection" : isKanji ? "N5 Kanji with Words" : isAdjective ? "N5 Adjectives" : isCounter ? `Counters · ${setTitle}` : `Verb Flashcards · ${setTitle}`;
+  $("japanese").textContent = (isKanji || isN1) ? v.word : isAdjective ? v.reading : isCounter ? v.prompt : v.masu;
+  $("japanese").classList.toggle("counter-prompt", isCounter);
+  const level = cardLevels.get(v.id);
+  const tag = $("statusTag");
+  tag.hidden = !level;
+  tag.className = "status-tag" + (level ? " status-" + level : "");
+  tag.textContent = level ? ({mastered:"✓ MASTERED",intermediate:"◉ INTERMEDIATE",needs:"✕ NEEDS REVISION"}[level]) : "";
+  document.querySelectorAll(".level-btn").forEach(btn => btn.classList.toggle("selected", btn.dataset.level === level));
+  $("answer").hidden = !isFlipped;
+  $("cardLabel").textContent = isFlipped
+    ? (isN1 ? "Meaning, readings & vocabulary" : isKanji ? "Word meaning & kanji breakdown" : isAdjective ? "Translation, forms & kanji" : isCounter ? "Counter reading & written form" : "Translation & verb forms")
+    : (isN1 ? "JLPT N1 kanji" : isKanji ? "Kanji word" : isAdjective ? "Hiragana reading" : isCounter ? "Counting prompt" : "Masu form");
+  $("flipBtn").textContent = isFlipped ? "↩ Hide answer" : "See answer ↗";
+  $("reading").hidden = !(isKanji || isN1 || isCounter);
+  $("meaning").textContent = v.meaning;
+  $("adjectiveKanji").hidden = !((isAdjective || isCounter) && isFlipped);
+  $("groupLabel").textContent = isN1 ? "On’yomi / Kun’yomi & example vocabulary" : isKanji ? "Vocabulary meaning" : isAdjective ? (v.type === "i" ? "い-adjective" : "な-adjective") : isCounter ? `Counter: ${v.counterName}` : `Group ${v.group}`;
+  $("formsLabel").hidden = isKanji || isN1 || isCounter;
+  $("forms").hidden = isKanji || isN1 || isCounter;
+  $("breakdownLabel").hidden = !(isKanji || isN1);
+  $("kanjiBreakdown").hidden = !(isKanji || isN1);
+
+  if (isAdjective) {
+    $("adjectiveKanji").innerHTML = furiganaHTML(v.word, v.reading);
+    $("reading").textContent = "";
+    $("forms").innerHTML = "";
+    [["Present negative", v.negative], ["Past", v.past], ["Past negative", v.pastNegative]].forEach(([label, value]) => {
+      const b = document.createElement("div"); b.className = "form-box";
+      const n = document.createElement("div"); n.className = "form-name"; n.textContent = label;
+      const x = document.createElement("div"); x.className = "form-value"; x.textContent = value;
+      b.append(n, x); $("forms").appendChild(b);
+    });
+    $("kanjiBreakdown").innerHTML = "";
+  } else if (isKanji || isN1) {
+    $("reading").textContent = v.reading;
+    $("adjectiveKanji").innerHTML = "";
+    $("forms").innerHTML = "";
+    const box = $("kanjiBreakdown"); box.innerHTML = "";
+    if (isN1) {
+      const details = document.createElement("div"); details.className = "form-box";
+      details.innerHTML = `<div class="form-name">Common compound</div><div class="form-value">${v.compound}</div><div class="form-name" style="margin-top:8px">Example vocabulary</div><div class="form-value">${v.example} · ${v.exampleReading}</div><div class="form-name" style="margin-top:4px">Meaning</div><div class="form-value">${v.exampleMeaning}</div>`; box.appendChild(details);
+    }
+    if (!v.chars || !v.chars.length) {
+      const note = document.createElement("div"); note.className = "form-box";
+      note.textContent = "The source sheet does not provide a clear character-by-character breakdown for this entry.";
+      box.appendChild(note);
+    } else {
+      v.chars.forEach(([symbol, reading, meaning]) => {
+        const c = document.createElement("div"); c.className = "char-box";
+        const sym = document.createElement("div"); sym.className = "char-symbol"; sym.textContent = symbol;
+        const r = document.createElement("div"); r.className = "char-reading"; r.textContent = reading;
+        const m = document.createElement("div"); m.className = "char-meaning"; m.textContent = meaning;
+        c.append(sym, r, m); box.appendChild(c);
+      });
+    }
+  } else if (isCounter) {
+    $("reading").textContent = v.reading;
+    $("adjectiveKanji").innerHTML = furiganaHTML(v.written, v.reading.split(" / ")[0]);
+    $("forms").innerHTML = "";
+    $("kanjiBreakdown").innerHTML = "";
+  } else {
+    $("reading").textContent = "";
+    $("adjectiveKanji").hidden = true;
+    const forms = $("forms"); forms.innerHTML = "";
+    [["Dictionary Form", v.dictionary], ["Nai Form", v.nai], ["Ta Form", v.ta], ["Nakatta Form", v.nakatta], ["Te Form", v.te]].forEach(([label, value]) => {
+      const b = document.createElement("div"); b.className = "form-box";
+      const n = document.createElement("div"); n.className = "form-name"; n.textContent = label;
+      const x = document.createElement("div"); x.className = "form-value"; x.textContent = value;
+      b.append(n, x); forms.appendChild(b);
+    });
+  }
+}
+
+function render() {
+  const total = reviewMode ? reviewQueue.length : originalDeck.length;
+  const n = reviewMode ? reviewIndex + 1 : currentIndex + 1;
+
+  renderCard();
+  renderSidebar();
+  renderKantoMap();
+  const shownCard = reviewMode ? reviewQueue[reviewIndex] : currentVerb();
+  const sideProgress = reviewMode ? (reviewIndex + 1) / Math.max(1, reviewQueue.length) : (currentIndex + 1) / Math.max(1, originalDeck.length);
+  if ($("sideProgressBar")) $("sideProgressBar").style.width = `${Math.round(sideProgress * 100)}%`;
+  if ($("sideProgressText")) $("sideProgressText").textContent = reviewMode ? `Review ${reviewIndex + 1} / ${reviewQueue.length}` : `${Math.min(currentIndex + 1, originalDeck.length)} / ${originalDeck.length} entries`;
+  if ($("sideCurrentSet")) $("sideCurrentSet").textContent = setInfo[currentSet] || currentSet;
+  if ($("studyLocation")) $("studyLocation").innerHTML = `<strong>${currentSet === "n1-kanji" ? "JLPT N1" : "JLPT N5"}</strong> / <strong>${groupLabels[currentSet] || "Study"}</strong> / ${setInfo[currentSet] || currentSet}. Open the Pokédex Index to change categories.`;
+  if ($("sideCurrentWord")) $("sideCurrentWord").textContent = shownCard ? ((currentSet === "kanji" || currentSet === "n1-kanji") ? shownCard.word : currentSet === "adjectives" ? shownCard.reading : currentSet.startsWith("counter-") ? shownCard.prompt : shownCard.masu) : "Set complete";
+  if ($("sideStudyMode")) $("sideStudyMode").textContent = reviewMode ? "Review round" : completedOriginalDeck ? "Set complete" : "Learning · First round";
+  $("completionPanel").hidden = !completedOriginalDeck || reviewMode;
+  $("completionMessage").textContent = `${setInfo[currentSet]} complete. ${reviewIds.size ? reviewIds.size + " entries still need a review." : "All entries mastered for this session."}`;
+  $("completionReviewBtn").disabled = reviewIds.size === 0;
+  $("completionReviewBtn").textContent = reviewIds.size ? `↻ Review marked entries (${reviewIds.size})` : "✓ No marked entries to review";
+  $("learningLevels").hidden = completedOriginalDeck && !reviewMode;
+  $("flipBtn").hidden = completedOriginalDeck && !reviewMode;
+  $("prevBtn").hidden = completedOriginalDeck && !reviewMode;
+  $("restartBtn").hidden = completedOriginalDeck && !reviewMode;
+  $("soundBtn").textContent = soundEnabled ? "♫ Sound: On" : "♫ Sound: Off";
+  document.querySelectorAll(".set-option").forEach(b =>
+    b.classList.toggle("active", b.dataset.set === currentSet)
+  );
+
+  if (reviewMode) {
+    $("progressText").textContent = `Review ${n} of ${total}`;
+    $("percentText").textContent = "Reviewing marked cards";
+  } else if (completedOriginalDeck) {
+    $("progressText").textContent = "Original deck complete";
+    $("percentText").textContent = reviewIds.size ? `${reviewIds.size} card(s) marked for review` : "All done";
+  } else {
+    $("progressText").textContent = `Card ${n} of ${total}`;
+    $("percentText").textContent = `${Math.round(n / total * 100)}% through set`;
+  }
+
+  $("progressFill").style.width = total ? `${Math.min(100, n / total * 100)}%` : "0%";
+  $("prevBtn").disabled = reviewMode ? reviewIndex === 0 : currentIndex === 0;
+
+}
+
+function startReview() {
+  reviewQueue = originalDeck.filter(v => reviewIds.has(v.id))
+    .sort((a,b) => (cardLevels.get(a.id)==="needs" ? -1 : 0) - (cardLevels.get(b.id)==="needs" ? -1 : 0));
+  if (!reviewQueue.length) {
+    completedOriginalDeck = true;
+    reviewMode = false;
+    render();
+    return;
+  }
+  reviewMode = true;
+  reviewIndex = 0;
+  isFlipped = false;
+  render();
+}
+
+$("toggleSidebar").addEventListener("click", () => $("app").classList.toggle("sidebar-collapsed"));
+document.addEventListener("click", event => {
+  const app = $("app");
+  if (window.matchMedia("(max-width: 700px)").matches &&
+      !app.classList.contains("sidebar-collapsed") &&
+      !event.target.closest(".sidebar") &&
+      !event.target.closest("#toggleSidebar")) {
+    app.classList.add("sidebar-collapsed");
+  }
+});
+$("flipBtn").addEventListener("click", () => {
+  isFlipped = !isFlipped;
+  render();
+});
+function playTone(kind="select") {
+  if (!soundEnabled) return;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = kind === "complete" ? [523,659,784,1046] : kind === "needs" ? [330,260] : [523,659];
+    notes.forEach((freq,i) => {
+      const osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.type = "square"; osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.045, ctx.currentTime + i*0.12);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.12 + 0.11);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i*0.12); osc.stop(ctx.currentTime + i*0.12 + 0.12);
+    });
+    setTimeout(() => ctx.close(), 900);
+  } catch(e) {}
+}
+function chooseLevel(level) {
+  const v = reviewMode ? reviewQueue[reviewIndex] : currentVerb();
+  if (!v) return;
+  cardLevels.set(v.id, level);
+  if (level === "mastered") reviewIds.delete(v.id);
+  else reviewIds.add(v.id);
+  playTone(level === "needs" ? "needs" : "select");
+  isFlipped = false;
+
+  if (reviewMode) {
+    // Each queued card is seen once in this review round; no endless loops.
+    if (reviewIndex < reviewQueue.length - 1) {
+      reviewIndex++;
+    } else {
+      reviewMode = false;
+      completedOriginalDeck = true;
+      reviewQueue = [];
+      reviewIndex = 0;
+      completeCurrentAcademySet();
+      playTone("complete");
+    }
+  } else if (currentIndex < originalDeck.length - 1) {
+    currentIndex++;
+  } else {
+    completedOriginalDeck = true;
+    if (reviewIds.size) startReview();
+    else { completeCurrentAcademySet(); playTone("complete"); }
+  }
+  render();
+}
+document.querySelectorAll(".level-btn").forEach(btn =>
+  btn.addEventListener("click", () => chooseLevel(btn.dataset.level))
+);
+$("prevBtn").addEventListener("click", () => {
+  if (reviewMode) {
+    if (reviewIndex > 0) { reviewIndex--; isFlipped = false; render(); }
+  } else if (currentIndex > 0) {
+    currentIndex--; completedOriginalDeck = false; isFlipped = false; render();
+  }
+});
+$("completionReviewBtn").addEventListener("click", () => {
+  if (!reviewIds.size) return;
+  // Build a fresh, finite review round from the entries still marked.
+  reviewMode = false;
+  completedOriginalDeck = true;
+  startReview();
+});
+function restartAdventure() {
+  originalDeck = [...getSetData(currentSet)];
+  deck = [...originalDeck];
+  currentIndex = 0;
+  isFlipped = false;
+  reviewIds = new Set();
+  cardLevels.clear();
+  reviewQueue = [];
+  reviewIndex = 0;
+  reviewMode = false;
+  completedOriginalDeck = false;
+  render();
+}
+$("completionRestartBtn").addEventListener("click", restartAdventure);
+$("soundBtn").addEventListener("click", () => {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) playTone("select");
+  render();
+});
+$("shuffleBtn").addEventListener("click", () => {
+  originalDeck = [...getSetData(currentSet)];
+  for (let i = originalDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [originalDeck[i], originalDeck[j]] = [originalDeck[j], originalDeck[i]];
+  }
+  deck = [...originalDeck];
+  currentIndex = 0;
+  isFlipped = false;
+  reviewMode = false;
+  reviewQueue = [];
+  reviewIndex = 0;
+  completedOriginalDeck = false;
+  reviewIds = new Set([...reviewIds].filter(id => originalDeck.some(v => v.id === id)));
+  render();
+});
+$("restartBtn").addEventListener("click", restartAdventure);
+$("toggleKantoMap").addEventListener("click",()=>{
+  const panel=$("kantoMap"); panel.hidden=!panel.hidden;
+  $("toggleKantoMap").textContent=panel.hidden?"OPEN MAP ▾":"HIDE MAP ▴";
+  $("toggleKantoMap").setAttribute("aria-expanded",String(!panel.hidden));
+  renderKantoMap();
+});
+$("closeKantoMap").addEventListener("click",()=>{
+  $("kantoMap").hidden=true; $("toggleKantoMap").textContent="OPEN MAP ▾"; $("toggleKantoMap").setAttribute("aria-expanded","false");
+});
+render();
+
+// --- Playable Kanto Academy world map ---
+(function initPlayableWorld(){
+ const screen=document.getElementById('worldScreen');
+ const canvas=document.getElementById('worldCanvas');
+ const ctx=canvas.getContext('2d');
+ const bg=new Image(), trainer=new Image();
+ bg.src='assets/kanto-world-map.png'; trainer.src='assets/trainer-sprites.png';
+ const locations=[
+  {id:'verbs',name:'N5 Verbs Pokécenter',short:'N5 VERBS',x:158,y:220,sets:['1-6','7-12'],desc:'Verb conjugation · 121 cards',icon:'🏠'},
+  {id:'adjectives',name:'N5 Adjectives Pokécenter',short:'N5 ADJECTIVES',x:448,y:105,sets:['adjectives'],desc:'い- and な-adjectives',icon:'🏡'},
+  {id:'kanji',name:'N5 Kanji Pokécenter',short:'N5 KANJI',x:696,y:194,sets:['kanji'],desc:'Kanji words and breakdowns',icon:'🏯'},
+  {id:'counters',name:'N5 Counters Pokécenter',short:'N5 COUNTERS',x:194,y:490,sets:Object.keys(counterCategories),desc:'Numbers and counting words',icon:'🏮'},
+  {id:'n1',name:'N1 Summit Pokécenter',short:'JLPT N1',x:754,y:490,sets:['n1-kanji'],desc:'Advanced kanji challenge',icon:'⛰️'}
+ ];
+ // Corridors are the walkable parts of the illustrated map; buildings/forest are solid.
+ const corridors=[
+  [0,274,265,326],[210,274,270,395],[210,354,510,406],[444,210,498,395],
+  [444,94,498,242],[444,208,760,258],[714,208,768,370],[714,324,960,376],
+  [210,354,270,530],[210,484,510,536],[450,418,500,536],[450,418,690,470],
+  [638,418,692,550],[638,504,960,556]
+ ];
+ const houseRects=[[108,180,198,270],[398,58,492,148],[646,156,742,250],[144,442,230,520],[660,444,748,520]];
+ const player={x:40,y:300,dir:0,frame:1,moving:false,speed:150}; // direction rows: down,left,right,up
+ const keys=new Set(); let last=0,near=null,hover=null,toastTimer=0;
+ const prompt=document.getElementById('worldPrompt'),promptTitle=document.getElementById('worldPromptTitle'),promptText=document.getElementById('worldPromptText');
+ const toast=document.getElementById('worldToast');
+ const mapRect=(r)=>({x:r[0],y:r[1],w:r[2]-r[0],h:r[3]-r[1]});
+ function unlocked(loc){const i=locations.indexOf(loc);return i===0||locations[i-1].sets.every(k=>academyCompletedSets.has(k));}
+ function complete(loc){return loc.sets.every(k=>academyCompletedSets.has(k));}
+ function locTarget(loc){if(loc.id==='verbs')return loc.sets.find(k=>!academyCompletedSets.has(k))||'1-6';if(loc.id==='counters')return loc.sets.find(k=>!academyCompletedSets.has(k))||loc.sets[0];return loc.sets[0];}
+ function setToast(text){toast.textContent=text;toast.hidden=false;toastTimer=2.5;}
+ function updateObjective(){const idx=locations.findIndex(l=>unlocked(l)&&!complete(l));const target=idx<0?null:locations[idx];document.getElementById('worldObjectiveTitle').textContent=target?`Next destination: ${target.name}`:'🏆 Kanto Academy complete!';document.getElementById('worldObjectiveText').textContent=target?`Visit the ${target.short} building and press Enter.`:'You have cleared every region. Keep revising from the Pokédex.';}
+ function inCorridor(x,y){return corridors.some(r=>x>=r[0]+9&&x<=r[2]-9&&y>=r[1]+8&&y<=r[3]-8);}
+ function blocked(x,y){if(x<12||y<15||x>948||y>626)return true; if(houseRects.some(r=>x>r[0]-9&&x<r[2]+9&&y>r[1]-4&&y<r[3]+7))return true; return !inCorridor(x,y);}
+ function closeEnough(loc){return Math.hypot(player.x-loc.x,player.y-loc.y)<72;}
+ function refreshNearby(){near=locations.filter(closeEnough).sort((a,b)=>Math.hypot(player.x-a.x,player.y-a.y)-Math.hypot(player.x-b.x,player.y-b.y))[0]||null;if(near){prompt.hidden=false;promptTitle.textContent=near.name;promptText.textContent=unlocked(near)?'Press ENTER or tap ENTER / STUDY':'🔒 Locked — clear the previous region first';document.getElementById('worldInteract').disabled=!unlocked(near);}else{prompt.hidden=true;document.getElementById('worldInteract').disabled=true;}}
+ function drawLabels(){locations.forEach(loc=>{const open=unlocked(loc),done=complete(loc);ctx.save();ctx.font='bold 12px system-ui';ctx.textAlign='center';const label=loc.short;const width=ctx.measureText(label).width+18;const x=loc.x-width/2,y=loc.y-65;ctx.fillStyle=done?'#d2f0c6':open?'#f7f4d8':'#d1d6cb';ctx.strokeStyle=near===loc?'#d9272e':'#193b32';ctx.lineWidth=3;ctx.fillRect(x,y,width,23);ctx.strokeRect(x,y,width,23);ctx.fillStyle='#19312c';ctx.fillText((done?'✓ ':open?'':'🔒 ')+label,loc.x,y+15);ctx.restore();});}
+ function drawPlayer(now){if(!trainer.complete)return;const row=player.dir;const col=player.moving?Math.floor(now/130)%3:1;ctx.drawImage(trainer,col*32,row*40,32,40,Math.round(player.x-16),Math.round(player.y-30),32,40);}
+ function render(now){ctx.clearRect(0,0,960,640);if(bg.complete)ctx.drawImage(bg,0,0,960,640);else{ctx.fillStyle='#8ec878';ctx.fillRect(0,0,960,640);}drawLabels();drawPlayer(now);if(hover){ctx.save();ctx.strokeStyle='#fff2a8';ctx.lineWidth=3;ctx.strokeRect(hover.x-48,hover.y-49,96,94);ctx.restore();}}
+ function frame(now){const dt=Math.min((now-last)/1000||0,0.035);last=now;let dx=0,dy=0;if(keys.has('left'))dx-=1;if(keys.has('right'))dx+=1;if(keys.has('up'))dy-=1;if(keys.has('down'))dy+=1;player.moving=!!(dx||dy);if(player.moving){if(Math.abs(dx)>Math.abs(dy))player.dir=dx<0?1:2;else player.dir=dy<0?3:0;const mag=Math.hypot(dx,dy)||1;dx=dx/mag*player.speed*dt;dy=dy/mag*player.speed*dt;const nx=player.x+dx,ny=player.y+dy;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;refreshNearby();}if(toastTimer>0){toastTimer-=dt;if(toastTimer<=0)toast.hidden=true;}render(now);requestAnimationFrame(frame);}
+ function enterLocation(loc){if(!loc){setToast('Walk up to a Pokécenter first.');return;}if(!unlocked(loc)){setToast('That region is locked. Complete the previous region first.');return;}const key=locTarget(loc);screen.hidden=true;document.getElementById('app').classList.add('study-active');switchSet(key);const name=loc.name;document.getElementById('studyLocation').innerHTML=`<strong>${name}</strong> / Welcome back, Trainer!`;window.scrollTo(0,0);}
+ function returnToWorld(){document.getElementById('app').classList.remove('study-active');screen.hidden=false;updateObjective();refreshNearby();}
+ function keyName(e){const k=e.key.toLowerCase();if(['arrowup','w'].includes(k))return 'up';if(['arrowdown','s'].includes(k))return 'down';if(['arrowleft','a'].includes(k))return 'left';if(['arrowright','d'].includes(k))return 'right';return null;}
+ window.addEventListener('keydown',e=>{if(screen.hidden)return;const k=keyName(e);if(k){e.preventDefault();keys.add(k);return;}if(e.key==='Enter'){e.preventDefault();enterLocation(near);}});
+ window.addEventListener('keyup',e=>{const k=keyName(e);if(k)keys.delete(k);});window.addEventListener('blur',()=>keys.clear());
+ document.querySelectorAll('.mobile-pad [data-move]').forEach(btn=>{const k=btn.dataset.move;const start=e=>{e.preventDefault();keys.add(k);};const end=e=>{e.preventDefault();keys.delete(k);};btn.addEventListener('pointerdown',start);btn.addEventListener('pointerup',end);btn.addEventListener('pointercancel',end);btn.addEventListener('pointerleave',end);});
+ document.getElementById('worldInteract').addEventListener('click',()=>enterLocation(near));
+ document.getElementById('worldOpenPokedex').addEventListener('click',()=>{document.getElementById('app').classList.add('study-active');document.getElementById('app').classList.remove('sidebar-collapsed');screen.hidden=true;document.getElementById('sidebarSets').scrollTop=0;});
+ document.getElementById('backToWorld').addEventListener('click',returnToWorld);
+ canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*960,y=(e.clientY-r.top)/r.height*640;hover=locations.find(l=>Math.abs(l.x-x)<55&&Math.abs(l.y-y)<58)||null;});
+ canvas.addEventListener('pointerleave',()=>hover=null);
+ canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*960,y=(e.clientY-r.top)/r.height*640;const loc=locations.find(l=>Math.abs(l.x-x)<55&&Math.abs(l.y-y)<58);if(loc){if(closeEnough(loc))enterLocation(loc);else setToast(`Walk closer to ${loc.name}, then press Enter.`);}});
+ // Completion handler calls this after each set; refresh unlock labels live.
+ const oldComplete=completeCurrentAcademySet;window.completeCurrentAcademySet=function(){oldComplete();updateObjective();};
+ updateObjective();refreshNearby();requestAnimationFrame(frame);
+})();
+
+</script></body></html>
